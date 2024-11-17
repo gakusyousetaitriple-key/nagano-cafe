@@ -71,25 +71,21 @@ ActiveRecord::Schema.define(version: 2024_11_16_135737) do
     t.index ["is_active"], name: "index_items_on_is_active"
   end
 
-  create_table "order_details", force: :cascade do |t|
-    t.integer "item_id", null: false
-    t.integer "order_id", null: false
-    t.integer "quantity", null: false
-    t.integer "price", null: false
-    t.integer "is_production", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["item_id"], name: "index_order_details_on_item_id"
-    t.index ["order_id"], name: "index_order_details_on_order_id"
-  end
-
   create_table "orders", force: :cascade do |t|
+    t.integer "customer_id", null: false
+    t.string "address", null: false
+    t.string "post_code", null: false
+    t.string "name", null: false
+    t.integer "total_amount", null: false
+    t.integer "postage", null: false
+    t.integer "payment_method", null: false
+    t.integer "is_order", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["customer_id"], name: "index_orders_on_customer_id"
   end
 
   add_foreign_key "addresses", "customers"
   add_foreign_key "items", "genres"
-  add_foreign_key "order_details", "items"
-  add_foreign_key "order_details", "orders"
+  add_foreign_key "orders", "customers"
 end
