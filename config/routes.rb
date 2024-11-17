@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
 
+  namespace :public do
+    resources :orders, only: [:new, :index, :show, :create]
+    get 'orders/confirm'
+    get 'orders/thanks'
+  end
 # 顧客用
 # URL /customers/sign_in ...
 devise_for :customers,skip: [:passwords], controllers: {
