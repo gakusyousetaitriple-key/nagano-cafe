@@ -59,4 +59,18 @@ class Public::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+
+
+  before_action :configure_sign_up_params, only: [:create]
+  
+  protected
+
+  # サインアップ時に追加のパラメータを許可
+  def configure_sign_up_params
+    devise_parameter_sanitizer.permit(:sign_up, keys: [
+      :email, :password, :password_confirmation, 
+      :last_name, :first_name, :kana_last_name, 
+      :kana_first_name, :post_code, :address, :telephone_number
+    ])
+  end
 end
