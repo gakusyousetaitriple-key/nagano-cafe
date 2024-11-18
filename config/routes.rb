@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    get 'homes/top'
+  end
   # Public routes
   root 'public/homes#top', as: 'top'
   get '/about', to: 'public/homes#about', as: 'about'
