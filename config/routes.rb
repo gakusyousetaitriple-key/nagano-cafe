@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   }
 
   namespace :public do
-    resource :customer, only: [:show, :edit, :update] do
+    resource :customer, only: [:show, :edit, :update,] do
       get 'my_page', to: 'customers#show'
       get 'information/edit', to: 'customers#edit'
       patch 'information', to: 'customers#update'

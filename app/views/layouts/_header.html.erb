@@ -10,10 +10,11 @@
     <% if customer_signed_in? %>
       <!-- ログイン後 -->
       <ul>
-        <li><a href="<%= customers_my_page_path %>">マイページ</a></li>
+      <li><a href="<%= public_customer_path %>">マイページ</a></li>
         <li><a href="<%= items_path %>">商品一覧</a></li>
-        <li><a href="<%= cart_items_path %>">カート</a></li>
-        <li><a href="<%= destroy_customer_session_path %>">ログアウト</a></li>
+        <li><a href="<%= public_cart_items_path %>">カート</a></li>
+        <li><%= button_to 'ログアウト', destroy_customer_session_path, method: :delete %>
+</li>
       </ul>
     <% else %>
       <!-- ログイン前 -->
