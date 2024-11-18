@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get '/about', to: 'public/homes#about', as: 'about'
   resources :items, only: [:index, :show]
 
+
   # 顧客用
   devise_for :customers, skip: [:passwords], controllers: {
     registrations: 'public/registrations',
@@ -47,3 +48,4 @@ Rails.application.routes.draw do
     end
   end
 end
+
