@@ -1,16 +1,16 @@
 class Admin::ItemsController < ApplicationController
-  # 管理者がログインしていない場合のリダイレクト処理を追加する場合はここに記述
   before_action :set_item, only: [:show, :edit, :update]
 
   def index
-    @items = Item.all
+    @items = Item.page(params[:page]).per(10) # 1ページに10件表示
   end
 
   def show
   end
 
   def new
-    @item = Item.new
+    @item = Item.new(is_active: true)
+    @genres = Genre.all # ジャンル一覧を取得
   end
 
   def create
