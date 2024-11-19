@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   
 
 
+
   # 顧客用
   devise_for :customers, skip: [:passwords], controllers: {
     registrations: 'public/registrations',
@@ -41,6 +42,7 @@ Rails.application.routes.draw do
 
     resources :addresses, only: [:index, :create, :edit, :update, :destroy]
   end
+
 
   # 管理者用
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
