@@ -1,0 +1,56 @@
+<h2>新規配送先の追加</h2>
+
+<%= form_with model: @address, url: public_addresses_path, local: true do |f| %>
+
+  <div>
+    <%= f.label :post_code, '郵便番号' %>
+    <%= f.text_field :post_code %>
+  </div>
+
+  <div>
+    <%= f.label :address, '住所' %>
+    <%= f.text_field :address %>
+  </div>
+
+  <div>
+    <%= f.label :name, '名前' %>
+    <%= f.text_field :name %>
+  </div>
+
+  <%= f.submit '追加' %>
+<% end %>
+
+
+
+<h1>配送先一覧</h1>
+
+<% if @addresses.any? %>
+  <table>
+    <thead>
+      <tr>
+        <th>名前</th>
+        <th>郵便番号</th>
+        <th>住所</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @addresses.each do |address| %>
+        <tr>
+          <td><%= address.name %></td>
+          <td><%= address.post_code %></td>
+          <td><%= address.address %></td>
+          <td>
+            <%= link_to '編集', edit_public_address_path(address) %> |
+            <%= button_to '削除', public_address_path(address), method: :delete, data: { confirm: '削除してもよろしいですか？' }, class: 'btn btn-danger' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>登録された配送先がありません。</p>
+<% end %>
+
+
+
