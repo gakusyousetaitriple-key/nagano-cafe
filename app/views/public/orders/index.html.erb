@@ -1,2 +1,5 @@
-<h1>Public::Orders#index</h1>
-<p>Find me in app/views/public/orders/index.html.erb</p>
+<h3>注文履歴</h3>
+<% @orders.each do |order| %>
+  <p><%= link_to "注文ID: #{order.id}", order_path(order) %></p>
+<% end %>
+

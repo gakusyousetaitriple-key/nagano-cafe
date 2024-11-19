@@ -37,7 +37,7 @@ Rails.application.routes.draw do
 
     resources :orders, only: [:new, :create, :index, :show] do
       post 'confirm', on: :collection
-      get 'thanks', on: :collection
+      get 'thanks', on: :collection # ここで'public/orders/thanks'のルートを定義
     end
 
     resources :addresses, only: [:index, :create, :edit, :update, :destroy]
