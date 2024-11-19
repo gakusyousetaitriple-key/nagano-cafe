@@ -1,0 +1,12 @@
+<%= form_with model: @genre, url: admin_genres_path, local: true do |f| %>
+  <div>
+    <%= f.label :name, "ジャンル名" %>
+    <%= f.text_field :name %>
+  </div>
+  <%= f.submit "追加" %>
+<% end %>
+
+<% @genres.each do |genre| %>
+  <p><%= genre.name %></p>
+  <%= link_to 'Edit', edit_admin_genre_path(genre) %>
+<% end %>

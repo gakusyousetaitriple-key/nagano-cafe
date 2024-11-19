@@ -1,0 +1,39 @@
+<h1>商品一覧</h1>
+
+<% if @items && @items.present? %>
+  <table>
+    <thead>
+      <tr>
+        <th>商品ID</th>
+        <th>商品名</th>
+        <th>税抜き価格</th>
+        <th>ジャンル</th>
+        <th>ステータス</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @items.each do |item| %>
+        <tr>
+          <td><%= item.id %></td>  <!-- 商品ID -->
+          <td><%= item.name %></td>  <!-- 商品名 -->
+          <td><%= item.price %>円</td>  <!-- 税抜き価格 -->
+          <td><%= item.genre ? item.genre.name : '未設定' %></td>  <!-- ジャンル（関連するジャンルがあれば表示） -->
+          <td><%= item.is_active ? '公開中' : '非公開' %></td>  <!-- ステータス -->
+          <td>
+            <%= link_to '詳細', admin_item_path(item) %> | 
+            <%= link_to '編集', edit_admin_item_path(item) %> | 
+            <%= link_to '削除', admin_item_path(item), method: :delete, data: { confirm: '本当に削除しますか？' } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <!-- ページネーションのリンクを追加 -->
+  <%= paginate @items %>
+<% else %>
+  <p>商品がありません。</p>
+<% end %>
+
+<%= link_to '新規商品登録', new_admin_item_path %>

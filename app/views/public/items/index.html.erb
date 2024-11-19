@@ -1,0 +1,39 @@
+<div class="page-layout">
+  <!-- 右側の商品一覧 -->
+  <div class="main-content">
+    <h1>
+      商品一覧 (<%= @items.count %>件)
+      <% if @genre.present? %>
+        <span class="genre-title">（<%= @genre.name %>一覧）</span>
+      <% end %>
+    </h1>
+
+    <div class="items-container">
+      <% @items.each do |item| %>
+        <div class="item-card">
+          <!-- 商品画像にリンクを追加（顧客用の詳細ページに遷移） -->
+          <%= link_to public_item_path(item) do %>
+            <% if item.image.attached? %>
+              <%= image_tag item.image, alt: item.name, class: "item-image" %>
+            <% else %>
+              <p>画像がありません</p>
+            <% end %>
+          <% end %>
+          
+          <!-- 商品名にリンクを追加（顧客用の詳細ページに遷移） -->
+          <%= link_to public_item_path(item) do %>
+            <p><strong><%= item.name %></strong></p>
+          <% end %>
+
+          <!-- 税込み価格を表示（¥マークを追加） -->
+          <p><%= "¥#{(item.price * 1.1).floor}" %>（税込み）</p>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- ページネーション -->
+    <div class="pagination">
+      <%= paginate @items %>
+    </div>
+  </div>
+</div>

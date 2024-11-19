@@ -1,0 +1,36 @@
+<div class="container">
+  <!-- 商品詳細情報 -->
+  <div class="item-details">
+    <!-- 商品画像 -->
+    <div class="item-image">
+      <% if @item.image.attached? %>
+        <%= image_tag @item.image, alt: @item.name, class: "large-image" %>
+      <% else %>
+        <p>画像がありません</p>
+      <% end %>
+    </div>
+
+    <!-- 商品情報 -->
+    <div class="item-info">
+      <h1><%= @item.name %></h1>
+      <p><%= @item.introduction %></p>
+      
+      <!-- 税込み価格のみ表示（¥マークを使用） -->
+      <p>
+        税込み価格: <%= "¥#{(@item.price * 1.1).floor}" %>
+      </p>
+
+      <!-- カートに入れるフォーム 11月19日14時修正-->
+      <%= form_with model: @cart_item, url: public_cart_items_path, method: :post, local: true do |f| %>
+        <div class="form-group">
+
+          <%= f.label :amount, "個数", class: "form-label" %>
+          <%= f.number_field :amount, value: 1, min: 1, class: "amount-input", required: true %>
+
+        </div>
+        <%= f.hidden_field :item_id, value: @item.id %>
+        <%= f.submit "カートに入れる", class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+</div>

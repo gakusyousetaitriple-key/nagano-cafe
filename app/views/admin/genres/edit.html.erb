@@ -1,0 +1,11 @@
+<h1>ジャンル編集</h1>
+
+<%= form_with model: @genre, url: admin_genre_path(@genre), method: :patch, local: true do |f| %>
+  <div>
+    <%= f.label :name, "ジャンル名" %>
+    <%= f.text_field :name, value: @genre.name %>
+  </div>
+  <%= f.submit "更新する" %>
+<% end %>
+
+<%= link_to '一覧に戻る', admin_genres_path %>
