@@ -7,18 +7,26 @@
         <span class="genre-title">（<%= @genre.name %>一覧）</span>
       <% end %>
     </h1>
-    
-    
+
     <div class="items-container">
       <% @items.each do |item| %>
         <div class="item-card">
-          <% if item.image.attached? %>
-            <%= image_tag item.image, alt: item.name, class: "item-image" %>
-          <% else %>
-            <p>画像がありません</p>
+          <!-- 商品画像にリンクを追加（顧客用の詳細ページに遷移） -->
+          <%= link_to public_item_path(item) do %>
+            <% if item.image.attached? %>
+              <%= image_tag item.image, alt: item.name, class: "item-image" %>
+            <% else %>
+              <p>画像がありません</p>
+            <% end %>
           <% end %>
-          <p><strong><%= item.name %></strong></p>
-          <p><%= (item.price * 1.1).floor %>円 (税抜き価格: <%= item.price %>円)</p>
+          
+          <!-- 商品名にリンクを追加（顧客用の詳細ページに遷移） -->
+          <%= link_to public_item_path(item) do %>
+            <p><strong><%= item.name %></strong></p>
+          <% end %>
+
+          <!-- 税込み価格を表示（¥マークを追加） -->
+          <p><%= "¥#{(item.price * 1.1).floor}" %>（税込み）</p>
         </div>
       <% end %>
     </div>

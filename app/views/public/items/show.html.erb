@@ -14,16 +14,17 @@
     <div class="item-info">
       <h1><%= @item.name %></h1>
       <p><%= @item.introduction %></p>
+      
+      <!-- 税込み価格のみ表示（¥マークを使用） -->
       <p>
-        税抜き価格: <%= @item.price %>円<br>
-        税込み価格: <%= (@item.price * 1.1).floor %>円
+        税込み価格: <%= "¥#{(@item.price * 1.1).floor}" %>
       </p>
 
       <!-- カートに入れるフォーム -->
       <%= form_with url: public_cart_items_path, method: :post, local: true do |f| %>
         <div class="form-group">
           <%= f.label :quantity, "個数" %>
-          <%= f.number_field :quantity, value: 1, min: 1, class: "quantity-input" %>
+          <%= f.number_field :quantity, min: 1, placeholder: "個数選択", class: "quantity-input" %>
         </div>
         <%= f.hidden_field :item_id, value: @item.id %>
         <%= f.submit "カートに入れる", class: "cart-button" %>
