@@ -19,14 +19,14 @@
         税込み価格: <%= (@item.price * 1.1).floor %>円
       </p>
 
-      <!-- カートに入れるフォーム -->
-      <%= form_with url: public_cart_items_path, method: :post, local: true do |f| %>
+      <!-- カートに入れるフォーム 11月19日14時修正-->
+      <%= form_with model: @cart_item, url: public_cart_items_path, method: :post, local: true do |f| %>
         <div class="form-group">
-          <%= f.label :quantity, "個数" %>
-          <%= f.number_field :quantity, value: 1, min: 1, class: "quantity-input" %>
+          <%= f.label :amount, "個数", class: "form-label" %>
+          <%= f.number_field :amount, value: 1, min: 1, class: "amount-input", required: true %>
         </div>
         <%= f.hidden_field :item_id, value: @item.id %>
-        <%= f.submit "カートに入れる", class: "cart-button" %>
+        <%= f.submit "カートに入れる", class: "btn btn-primary" %>
       <% end %>
     </div>
   </div>

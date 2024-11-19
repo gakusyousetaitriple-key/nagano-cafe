@@ -1,19 +1,19 @@
 class Public::CartItemsController < ApplicationController
   # カート内一覧表示
   def index
-    @cart_items = current_customer.cart_items
-    @total_price = @cart_items.sum { |item| item.quantity * item.item.price }
+    @cart_items = current_customer.cart_items.includes(:item)
+    @total_price = @cart_items.sum { |item| item.amount * item.item.price }
   end
-
   # カートに商品を追加
   def create
     @cart_item = current_customer.cart_items.find_by(item_id: params[:cart_item][:item_id])
+    
     if @cart_item
-      @cart_item.quantity += params[:cart_item][:quantity].to_i
+      @cart_item.amount += params[:cart_item][:amount].to_i
     else
       @cart_item = current_customer.cart_items.new(cart_item_params)
     end
-
+  
     if @cart_item.save
       redirect_to public_cart_items_path, notice: '商品をカートに追加しました。'
     else
@@ -47,6 +47,6 @@ class Public::CartItemsController < ApplicationController
   private
 
   def cart_item_params
-    params.require(:cart_item).permit(:item_id, :quantity)
+    params.require(:cart_item).permit(:item_id, :amount)
   end
 end
