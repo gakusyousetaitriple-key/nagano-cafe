@@ -10,6 +10,7 @@ class Public::ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id]) # 商品詳細を取得
+    @item = Item.find(params[:id])
+    @cart_item = current_customer.cart_items.find_or_initialize_by(item_id: @item.id) # 修正箇所
   end
 end
