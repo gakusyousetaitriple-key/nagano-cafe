@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   # Public routes
   root 'public/homes#top', as: 'top'
   get '/about', to: 'public/homes#about', as: 'about'
-  resources :items, only: [:index, :show]
+  
 
 
   # 顧客用
@@ -26,6 +26,9 @@ Rails.application.routes.draw do
       get 'unsubscribe', to: 'customers#unsubscribe'
       patch 'withdraw', to: 'customers#withdraw'
     end
+    
+    resources :items, only: [:index, :show]
+
 
     resources :cart_items, only: [:index, :create, :update, :destroy] do
       delete 'destroy_all', on: :collection

@@ -16,7 +16,7 @@
     <!-- ログイン後（顧客） -->
     <ul>
       <li><a href="<%= public_customer_path %>">マイページ</a></li>
-      <li><a href="<%= items_path %>">商品一覧</a></li>
+      <li><a href="<%= public_items_path %>">商品一覧</a></li>
       <li><a href="<%= public_cart_items_path %>">カート</a></li>
       <li><%= button_to 'ログアウト', destroy_customer_session_path, method: :delete %></li>
     </ul>
@@ -33,7 +33,7 @@
     <!-- ログイン前 -->
     <ul>
       <li><a href="<%= about_path %>">About</a></li>
-      <li><a href="<%= items_path %>">商品一覧</a></li>
+      <li><a href="<%= public_items_path %>">商品一覧</a></li>
       <li><a href="<%= new_customer_registration_path %>">新規登録</a></li>
       <li><a href="<%= new_customer_session_path %>">ログイン</a></li>
     </ul>
