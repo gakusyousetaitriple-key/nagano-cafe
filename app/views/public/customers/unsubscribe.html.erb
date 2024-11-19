@@ -5,5 +5,5 @@
     退会する場合は、「退会する」をクリックしてください。
   </p>
 
-  <%= link_to "退会しない", my_page_public_customers_path(@customer), :class => "btn btn-primary ms-3" %>
-  <%= link_to "退会する", withdraw_public_customers_path(@customer), method: :patch, :class => "btn btn-danger ms-3", data: { confirm: "本当に退会しますか？" }  %>
+  <%= link_to "退会しない", my_page_public_customer_path(@customer), :class => "btn btn-primary ms-3" %>
+  <%= link_to "退会する", withdraw_public_customer_path(@customer), method: :patch, :class => "btn btn-danger ms-3", data: { confirm: "本当に退会しますか？" }  %>
