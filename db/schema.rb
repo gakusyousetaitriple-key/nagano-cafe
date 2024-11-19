@@ -10,7 +10,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
 ActiveRecord::Schema.define(version: 2024_11_18_012036) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
@@ -40,7 +39,6 @@ ActiveRecord::Schema.define(version: 2024_11_18_012036) do
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
-
 
   create_table "addresses", force: :cascade do |t|
     t.integer "customer_id", null: false
@@ -108,6 +106,7 @@ ActiveRecord::Schema.define(version: 2024_11_18_012036) do
     t.boolean "is_active", default: true, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["genre_id"], name: "index_items_on_genre_id"
     t.index ["is_active"], name: "index_items_on_is_active"
   end
 
@@ -137,7 +136,6 @@ ActiveRecord::Schema.define(version: 2024_11_18_012036) do
     t.index ["customer_id"], name: "index_orders_on_customer_id"
   end
 
-
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "addresses", "customers"
@@ -145,7 +143,4 @@ ActiveRecord::Schema.define(version: 2024_11_18_012036) do
   add_foreign_key "order_details", "items"
   add_foreign_key "order_details", "orders"
   add_foreign_key "orders", "customers"
-
-
-
 end

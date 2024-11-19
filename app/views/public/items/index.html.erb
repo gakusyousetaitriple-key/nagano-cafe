@@ -1,1 +1,31 @@
-<h1>顧客商品一覧</h1>
+<div class="page-layout">
+  <!-- 右側の商品一覧 -->
+  <div class="main-content">
+    <h1>
+      商品一覧 (<%= @items.count %>件)
+      <% if @genre.present? %>
+        <span class="genre-title">（<%= @genre.name %>一覧）</span>
+      <% end %>
+    </h1>
+    
+    
+    <div class="items-container">
+      <% @items.each do |item| %>
+        <div class="item-card">
+          <% if item.image.attached? %>
+            <%= image_tag item.image, alt: item.name, class: "item-image" %>
+          <% else %>
+            <p>画像がありません</p>
+          <% end %>
+          <p><strong><%= item.name %></strong></p>
+          <p><%= (item.price * 1.1).floor %>円 (税抜き価格: <%= item.price %>円)</p>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- ページネーション -->
+    <div class="pagination">
+      <%= paginate @items %>
+    </div>
+  </div>
+</div>
