@@ -1,2 +1,23 @@
-<h1>Public::Orders#confirm</h1>
-<p>Find me in app/views/public/orders/confirm.html.erb</p>
+<h3>注文内容確認</h3>
+<p>お届け先: <%= @order.post_code %> <%= @order.address %> <%= @order.name %></p>
+<p>支払い方法: <%= @order.payment_method == "credit_card" ? "クレジットカード" : "銀行振込" %></p>
+
+<h4>注文商品一覧</h4>
+<% @cart_items.each do |cart_item| %>
+  <p><%= cart_item.item.name %>: <%= cart_item.amount %>個</p>
+<% end %>
+
+<%= form_with model: @order, url: public_orders_path, method: :post do |f| %>
+  <%= f.hidden_field :address, value: @order.address %>
+  <%= f.hidden_field :post_code, value: @order.post_code %>
+  <%= f.hidden_field :name, value: @order.name %>
+  <%= f.hidden_field :payment_method, value: @order.payment_method %>
+
+  <!-- 注文内容の合計金額などの表示 -->
+  <p>合計金額: <%= number_to_currency(@order.total_amount, unit: "円") %></p>
+  <p>送料: <%= number_to_currency(@order.postage, unit: "円") %></p>
+  <p>注文金額: <%= number_to_currency(@order.total_amount + @order.postage, unit: "円") %></p>
+  
+
+  <%= f.submit "注文を確定する" %>
+<% end %>
