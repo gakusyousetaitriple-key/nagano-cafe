@@ -1,3 +1,72 @@
 // Place all the styles related to the admin/items controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+/* ヘッダーのコンテナ */
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* 商品一覧タイトル */
+.page-title {
+  margin-left: 10px;
+  margin-top: 30px; /* 商品一覧タイトルを下に移動 */
+}
+
+/* 新規商品登録ボタン */
+.add-item-button {
+  text-align: right;
+  margin-right: 160px;
+}
+
+.add-item-link {
+  font-size: 30px;
+  padding: 10px 20px;
+  background-color: white;
+  color: black;
+  text-decoration: none;
+  border-radius: 50%;
+  display: inline-block;
+  border: 2px solid black;
+}
+
+/* 商品テーブル */
+.product-table {
+  width: 80%;
+  margin: 10px auto 0;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+/* テーブルヘッダー */
+.table-header {
+  background-color: #f4f4f4;
+}
+
+.table-cell {
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+/* 商品ステータス */
+.active-status {
+  color: yellowgreen;
+  font-weight: bold;
+}
+
+.inactive-status {
+  color: gray;
+  font-weight: bold;
+}
+
+/* ページネーション */
+.pagination-container {
+  margin-top: 20px;
+  text-align: center;
+}
+
+/* 商品がない場合のメッセージ */
+.no-items-message {
+  text-align: center;
+}

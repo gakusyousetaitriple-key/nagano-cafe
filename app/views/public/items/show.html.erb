@@ -1,36 +1,40 @@
 <div class="container">
   <!-- 商品詳細情報 -->
-  <div class="item-details">
-    <!-- 商品画像 -->
-    <div class="item-image">
-      <% if @item.image.attached? %>
-        <%= image_tag @item.image, alt: @item.name, class: "large-image" %>
-      <% else %>
-        <p>画像がありません</p>
-      <% end %>
-    </div>
-
-    <!-- 商品情報 -->
-    <div class="item-info">
-      <h1><%= @item.name %></h1>
-      <p><%= @item.introduction %></p>
+  <table class="product-table">
+    <tr>
+      <!-- 商品画像 -->
+      <td class="product-image-container">
+        <% if @item.image.attached? %>
+          <%= image_tag @item.image, alt: @item.name, class: "large-image" %>
+        <% else %>
+          <p>画像がありません</p>
+        <% end %>
+      </td>
       
-      <!-- 税込み価格のみ表示（¥マークを使用） -->
-      <p>
-        税込み価格: <%= "¥#{(@item.price * 1.1).floor}" %>
-      </p>
+      <!-- 商品情報 -->
+      <td class="product-info-container">
+        <h1 class="product-name"><%= @item.name %></h1> <!-- 商品名の改行を防止 -->
+        <p><%= @item.introduction %></p>
+        
+        <!-- 税込み価格 -->
+        <p class="price">
+           <%= "¥#{(@item.price * 1.1).floor}"%>(税込)
+        </p>
+        
+        <!-- カートに入れるフォーム -->
+        <%= form_with model: @cart_item, url: public_cart_items_path, method: :post, local: true do |f| %>
+          <div class="cart-form">
+            <!-- 個数入力 -->
+            <div class="form-group">
+              <%= f.number_field :amount, value: nil, min: 1, class: "amount-input", required: true, placeholder: "個数選択" %>
+            </div>
 
-      <!-- カートに入れるフォーム 11月19日14時修正-->
-      <%= form_with model: @cart_item, url: public_cart_items_path, method: :post, local: true do |f| %>
-        <div class="form-group">
-
-          <%= f.label :amount, "個数", class: "form-label" %>
-          <%= f.number_field :amount, value: 1, min: 1, class: "amount-input", required: true %>
-
-        </div>
-        <%= f.hidden_field :item_id, value: @item.id %>
-        <%= f.submit "カートに入れる", class: "btn btn-primary" %>
-      <% end %>
-    </div>
-  </div>
+            <!-- カートに入れるボタン -->
+            <%= f.hidden_field :item_id, value: @item.id %>
+            <%= f.submit "カートに入れる", class: "add-to-cart-btn" %>
+          </div>
+        <% end %>
+      </td>
+    </tr>
+  </table>
 </div>
