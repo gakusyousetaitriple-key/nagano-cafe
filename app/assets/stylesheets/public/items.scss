@@ -1,3 +1,142 @@
-// Place all the styles related to the public/items controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
+/* ページ全体のレイアウト */
+.page-layout {
+  width: 100%;
+}
+
+/* 商品一覧セクション */
+.main-content {
+  padding: 20px;
+  width: 100%;
+}
+
+/* 商品一覧タイトル */
+.page-title {
+  font-size: 24px;
+  margin-left: 130px; /* 左に少し余白を追加 */
+}
+
+.genre-title {
+  font-style: italic;
+}
+
+/* 商品テーブル */
+.product-table {
+  width: 80%; /* テーブルの幅を80%に設定 */
+  margin: 0 auto; /* 中央寄せ */
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+/* 商品項目 */
+.product-item {
+  text-align: center;
+  padding: 10px;
+  vertical-align: top;
+}
+
+/* 商品画像 */
+.product-image {
+  width: 100%;
+  height: auto;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* ページネーション */
+.pagination {
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* ここから下は商品詳細情報のCSSです */
+.product-table {
+  width: 80%;
+  border-collapse: collapse;
+  font-size: 18px;
+  margin: 0 auto;
+}
+
+/* 商品画像のコンテナ */
+.product-image-container {
+  width: 50%;
+  padding: 30px;
+  text-align: right; /* 画像を右寄せ */
+  margin-left: 20px; /* 左に少し余白を追加 */
+}
+
+/* 商品画像のサイズ */
+.large-image {
+  max-width: 150%; /* 画像を150%に拡大 */
+  height: auto; /* アスペクト比を保ったまま高さを自動調整 */
+}
+
+
+/* 商品情報 */
+.product-info-container {
+  width: 50%;
+  padding: 30px;
+}
+
+/* 商品名 */
+.product-name {
+  white-space: nowrap; /* 改行を防止 */
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+/* 価格 */
+.price {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+/* カートに入れるフォーム */
+.cart-form {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* 個数入力 */
+.form-group {
+  margin: 0;
+}
+
+/* 個数入力フィールド */
+.amount-input {
+  width: 100%; /* フィールドの幅を100%に設定して、親要素に合わせる */
+  max-width: 120px; /* 最大幅を少し広めに設定 */
+  padding: 8px 10px; /* 内側の余白を広めにして文字が収まりやすく */
+  font-size: 16px; /* フォントサイズを調整して文字が収まりやすく */
+  text-align: center; /* 中央揃えにして文字がきれいに見えるように */
+  box-sizing: border-box; /* パディング分も含めて幅を計算する */
+}
+
+/* カートに入れるボタン */
+.add-to-cart-btn {
+  background-color: #198754;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* コンテナの高さを自動に戻す */
+.container {
+  
+  margin: 0 auto; /* 中央寄せ */
+  padding: 20px; /* 内側の余白 */
+  height: auto; /* 高さをコンテンツに応じて自動調整 */
+}
+
+/* 矢印キーの表示 */
+.amount-input::-webkit-inner-spin-button,
+.amount-input::-webkit-outer-spin-button {
+  -webkit-appearance: inner-spin-button; /* 確実に矢印を表示 */
+  display: block; /* 矢印を有効化 */
+}
+

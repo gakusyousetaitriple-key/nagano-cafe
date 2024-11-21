@@ -1,39 +1,47 @@
-<h1>商品一覧</h1>
+<div class="header-container">
+  <h1 class="page-title">商品一覧</h1> <!-- 商品一覧タイトルを下に移動 -->
+  
+  <!-- 新規商品登録ボタンを右上に配置 -->
+  <div class="add-item-button">
+    <%= link_to '+', new_admin_item_path, class: "add-item-link" %>
+  </div>
+</div>
 
 <% if @items && @items.present? %>
-  <table>
+  <!-- テーブル全体を上に移動 -->
+  <table class="product-table">
     <thead>
-      <tr>
-        <th>商品ID</th>
-        <th>商品名</th>
-        <th>税抜き価格</th>
-        <th>ジャンル</th>
-        <th>ステータス</th>
-        <th>操作</th>
+      <tr class="table-header">
+        <th class="table-cell">商品ID</th>
+        <th class="table-cell">商品名</th>
+        <th class="table-cell">税抜価格</th>
+        <th class="table-cell">ジャンル</th>
+        <th class="table-cell">ステータス</th>
       </tr>
     </thead>
     <tbody>
       <% @items.each do |item| %>
         <tr>
-          <td><%= item.id %></td>  <!-- 商品ID -->
-          <td><%= item.name %></td>  <!-- 商品名 -->
-          <td><%= item.price %>円</td>  <!-- 税抜き価格 -->
-          <td><%= item.genre ? item.genre.name : '未設定' %></td>  <!-- ジャンル（関連するジャンルがあれば表示） -->
-          <td><%= item.is_active ? '公開中' : '非公開' %></td>  <!-- ステータス -->
-          <td>
-            <%= link_to '詳細', admin_item_path(item) %> | 
-            <%= link_to '編集', edit_admin_item_path(item) %> | 
-            <%= link_to '削除', admin_item_path(item), method: :delete, data: { confirm: '本当に削除しますか？' } %>
-          </td>
+          <td class="table-cell"><%= item.id %></td> <!-- 商品ID -->
+          <td class="table-cell"><%= link_to item.name, admin_item_path(item) %></td> <!-- 商品名 -->
+          <td class="table-cell"><%= item.price %></td> <!-- 税抜価格 -->
+          <td class="table-cell"><%= item.genre ? item.genre.name : '未設定' %></td> <!-- ジャンル -->
+          <td class="table-cell">
+            <% if item.is_active %>
+              <span class="active-status">販売中</span>
+            <% else %>
+              <span class="inactive-status">販売停止中</span>
+            <% end %>
+          </td> <!-- ステータス -->
         </tr>
       <% end %>
     </tbody>
   </table>
 
-  <!-- ページネーションのリンクを追加 -->
-  <%= paginate @items %>
+  <!-- ページネーションのリンクを中央寄せ -->
+  <div class="pagination-container">
+    <%= paginate @items %>
+  </div>
 <% else %>
-  <p>商品がありません。</p>
+  <p class="no-items-message">商品がありません。</p>
 <% end %>
-
-<%= link_to '新規商品登録', new_admin_item_path %>

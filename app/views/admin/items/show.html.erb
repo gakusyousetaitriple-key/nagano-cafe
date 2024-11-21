@@ -10,17 +10,17 @@
     <% end %>
   </div>
 
-  <!-- 中央に商品情報 -->
+  <!-- 右側に商品情報 -->
   <div class="product-info">
     <p><strong>商品名:</strong> <%= @item.name %></p>
     <p><strong>商品説明:</strong> <%= @item.introduction %></p>
     <p><strong>ジャンル:</strong> <%= @item.genre.name %></p>
-    <p><strong>税込み価格:</strong> <%= (@item.price * 1.1).floor %>円 (税抜き価格: <%= @item.price %>円)</p>
+    <p><strong>税込価格(税抜価格):</strong> <%= (@item.price * 1.1).floor %>円 <span class="tax-excluded-price">(<%= @item.price %>円)</span></p>
     <p><strong>販売ステータス:</strong> <%= @item.is_active ? "販売中" : "販売停止中" %></p>
-  </div>
 
-  <!-- 編集ボタン -->
-  <div class="edit-button">
-    <%= link_to "編集", edit_admin_item_path(@item), class: "btn btn-primary" %>
+    <!-- 編集ボタン -->
+    <div class="edit-button">
+      <%= link_to "編集する", edit_admin_item_path(@item), class: "btn btn-primary" %>
+    </div>
   </div>
 </div>
