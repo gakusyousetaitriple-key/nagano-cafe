@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    get 'orders/index'
+    get 'orders/show'
+  end
   namespace :public do
     get 'addresses/index'
     get 'addresses/edit'
@@ -51,9 +55,10 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root 'homes#top'
-
     resources :items, only: [:index, :new, :create, :show, :edit, :update]
     resources :genres, only: [:index, :create, :edit, :update]
+    resources :orders, only: [:index]
+    get '/customer/:id/orders' => 'customers#orders', as: :order_admin_customer
     resources :customers, only: [:index, :show, :edit, :update]
     resources :orders, only: [:show, :update] do
       resources :order_details, only: [:update]

@@ -2,10 +2,10 @@ class Public::AddressesController < ApplicationController
   before_action :set_address, only: [:edit, :update, :destroy]
 
   def index
-    @addresses = Address.all # 配送先一覧を取得
+    @addresses = current_customer.addresses # 配送先一覧を取得
     @address = Address.new  # 新規登録用
   end
-  
+
   def edit
     @address = Address.find(params[:id])
   end
@@ -13,7 +13,7 @@ class Public::AddressesController < ApplicationController
   def create
     @address = Address.new(address_params)
     @address.customer_id = current_customer.id  # ログイン中のユーザーIDを設定
-  
+
     if @address.save
       redirect_to public_addresses_path, notice: '配送先を追加しました。'
     else

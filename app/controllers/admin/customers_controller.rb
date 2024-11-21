@@ -17,6 +17,12 @@ class Admin::CustomersController < ApplicationController
     redirect_to admin_customer_path(@customer)
   end
   
+  def orders
+    @customer = Customer.find(params[:id])
+    @orders = @customer.orders
+    @orders = @customer.orders.order(created_at: :desc)
+  end
+  
   private
   def customer_params
     params.require(:customer).permit(:last_name, :first_name, :kana_last_name, :kana_first_name, :email, :address, :telephone_number, :post_code, :is_active)

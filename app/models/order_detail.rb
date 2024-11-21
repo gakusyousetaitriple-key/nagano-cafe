@@ -9,4 +9,8 @@ class OrderDetail < ApplicationRecord
   validates :price, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :is_production, presence: true
 
+  # 消費税を求めるメソッド
+  def with_tax_price
+    (price * 1.1).floor
+  end
 end
