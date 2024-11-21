@@ -1,13 +1,13 @@
 <h1 class="text-center mb-4">商品新規登録</h1>
 
-<%= form_with(model: @item, url: admin_items_path, local: true, html: { class: "form-center" }) do |form| %>
-  <div class="container">
-    <table>
+<%= form_with(model: @item, url: admin_items_path, local: true, html: { class: "form-container" }) do |form| %>
+  <div class="form-wrapper">
+    <table class="form-table">
       <tr>
         <td class="form-group"><%= form.label :image, "商品画像" %></td>
         <td class="form-group"><%= form.file_field :image, class: "form-control" %></td>
       </tr>
-      
+
       <tr>
         <td class="form-group"><%= form.label :name, "商品名" %></td>
         <td class="form-group"><%= form.text_field :name, placeholder: "商品名", class: "form-control" %></td>
@@ -49,21 +49,4 @@
       </tr>
     </table>
   </div>
-
 <% end %>
-
-<%= link_to '戻る', admin_items_path, class: 'btn btn-secondary mt-3' %>
-
-<!-- CSS: 数字入力フィールドの矢印を非表示にする -->
-<style>
-  /* 数字入力フィールドの矢印を非表示にする */
-  input[type="number"]::-webkit-outer-spin-button,
-  input[type="number"]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-
-  input[type="number"] {
-    -moz-appearance: textfield; /* Firefox用 */
-  }
-</style>

@@ -28,8 +28,8 @@
   </div>
 
   <div class="form-group">
-    <%= form.label :price, "税抜き価格" %>
-    <%= form.number_field :price, class: "form-control", min: 0, placeholder: "税抜き価格" %>
+    <%= form.label :price, "税抜価格" %>
+    <%= form.number_field :price, class: "form-control", min: 0, placeholder: "税抜価格" %>
   </div>
 
   <div class="form-group">
@@ -49,18 +49,3 @@
   </div>
 
 <% end %>
-
-<%= link_to '戻る', admin_items_path, class: 'btn btn-secondary' %>
-
-<!-- CSS: 数字入力フィールドの矢印を非表示にする -->
-<style>
-  input[type="number"]::-webkit-outer-spin-button,
-  input[type="number"]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-
-  input[type="number"] {
-    -moz-appearance: textfield;
-  }
-</style>

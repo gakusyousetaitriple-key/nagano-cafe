@@ -25,8 +25,8 @@
         <%= form_with model: @cart_item, url: public_cart_items_path, method: :post, local: true do |f| %>
           <div class="cart-form">
             <!-- 個数入力 -->
-            <div class="form-group">
-              <%= f.number_field :amount, value: nil, min: 1, class: "amount-input", required: true, placeholder: "個数選択" %>
+            <div>
+              <%= f.number_field :amount, value: nil, min: 1, step: 1, class: "amount-input", required: true, placeholder: "個数選択" %>
             </div>
 
             <!-- カートに入れるボタン -->

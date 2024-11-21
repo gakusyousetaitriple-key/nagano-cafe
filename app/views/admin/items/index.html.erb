@@ -14,7 +14,7 @@
       <tr class="table-header">
         <th class="table-cell">商品ID</th>
         <th class="table-cell">商品名</th>
-        <th class="table-cell">税抜き価格</th>
+        <th class="table-cell">税抜価格</th>
         <th class="table-cell">ジャンル</th>
         <th class="table-cell">ステータス</th>
       </tr>
@@ -24,7 +24,7 @@
         <tr>
           <td class="table-cell"><%= item.id %></td> <!-- 商品ID -->
           <td class="table-cell"><%= link_to item.name, admin_item_path(item) %></td> <!-- 商品名 -->
-          <td class="table-cell"><%= item.price %></td> <!-- 税抜き価格 -->
+          <td class="table-cell"><%= item.price %></td> <!-- 税抜価格 -->
           <td class="table-cell"><%= item.genre ? item.genre.name : '未設定' %></td> <!-- ジャンル -->
           <td class="table-cell">
             <% if item.is_active %>

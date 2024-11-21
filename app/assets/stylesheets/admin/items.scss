@@ -1,11 +1,17 @@
 // Place all the styles related to the admin/items controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+// 下記は商品一覧ページのCSSです
 /* ヘッダーのコンテナ */
 .header-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.text-center {
+  margin-right: 180px;
 }
 
 /* 商品一覧タイトル */
@@ -69,4 +75,174 @@
 /* 商品がない場合のメッセージ */
 .no-items-message {
   text-align: center;
+}
+
+//下記は新規作成ページのCSSです
+/* 中央寄せの基本設定 */
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  padding: 20px;
+}
+
+.text-center mb-4 {
+  margin-right: 180px;
+}
+.form-wrapper {
+  width: 80%;
+  max-width: 600px; /* 最大幅を設定 */
+  padding: 20px;
+  
+}
+
+/* テーブルのスタイル */
+.form-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.form-table td {
+  padding: 10px 15px;
+  vertical-align: top;
+}
+
+/* 入力フィールドの基本スタイル */
+.form-control {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  border-radius: 4px;
+}
+
+/* ラジオボタンの配置調整 */
+.form-check {
+  margin-bottom: 10px;
+}
+
+/* ボタンのスタイル */
+.btn {
+  padding: 10px 20px;
+  font-size: 14px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+/* 数字入力フィールドの矢印を表示 */
+input[type="number"] {
+  -webkit-appearance: number; /* Safari, Chrome用 */
+  -moz-appearance: textfield; /* Firefox用 */
+  appearance: number; /* 標準プロパティ */
+}
+
+
+input[type="number"] {
+  -moz-appearance: textfield; /* Firefox用 */
+}
+
+// 下記は商品詳細ページのCSSです
+.product-detail {
+  display: flex;  /* 横並びにするためにフレックスボックスを使用 */
+  justify-content: flex-end;  /* コンテンツを右寄せにする */
+  align-items: flex-start;  /* 上に合わせて配置 */
+  gap: 20px;  /* 画像と商品情報の間にスペースを追加 */
+  padding-left: 20px;  /* 左側に余白を追加（全体を右に寄せる効果） */
+  margin-bottom: 20px;  /* 下部にスペースを追加 */
+}
+
+.product-image {
+  flex: 1;  /* 画像のエリアを指定 */
+  max-width: 300px;  /* 画像の最大幅を指定 */
+  text-align: center;  /* 画像を中央に表示 */
+}
+
+.product-image .large-image {
+  width: 100%;  /* 画像が親要素に合わせてサイズ調整される */
+  height: auto;
+}
+
+.product-info {
+  flex: 2;  /* 商品情報のエリアを指定 */
+  display: flex;
+  flex-direction: column;  /* 商品情報を縦並びに */
+  gap: 10px;  /* 商品情報の項目間にスペースを追加 */
+}
+
+.product-info p {
+  margin: 0;  /* pタグのデフォルトの余白を削除 */
+}
+
+.edit-button {
+  margin-top: 20px;  /* 編集ボタンの上にスペースを追加 */
+  align-self: flex-start;  /* 編集ボタンを左寄せに配置（必要に応じて調整） */
+}
+
+// 下記は商品詳細ページのcssです
+/* フォーム全体を中央寄せにする */
+.form-center {
+  width: 50%; /* フォームの横幅を50%に設定（好みに合わせて調整） */
+  margin: 0 auto; /* 上下の余白はそのままで、左右は中央に配置 */
+  padding: 20px; /* フォームの内側に少し余白を追加 */
+}
+
+/* 各フォームグループのスタイル */
+.form-group {
+  margin-bottom: 20px; /* 各フォーム要素の間に余白 */
+}
+
+/* 入力フィールドの横幅を調整 */
+.form-control {
+  width: 100%; /* 入力フィールドがフォームの横幅に合わせて伸びるように設定 */
+  padding: 10px; /* 文字と入力欄の間に余白を追加 */
+  border-radius: 5px; /* 角を少し丸くする */
+}
+
+/* 画像のプレビューのスタイル */
+.preview-image {
+  max-width: 200px; /* 画像の最大幅を設定 */
+  margin-top: 10px; /* 画像の上に少し余白を追加 */
+}
+
+/* ボタンのスタイル */
+.btn {
+  padding: 10px 20px; /* ボタンの内側の余白 */
+  font-size: 16px; /* ボタンの文字サイズ */
+  border-radius: 5px; /* ボタンの角を丸く */
+  cursor: pointer; /* カーソルをポインタに変更 */
+}
+
+/* ラジオボタンのカスタムスタイル */
+.form-check-input {
+  margin-right: 5px; /* ラジオボタンとラベルの間に少しスペースを追加 */
+}
+
+.form-check-label {
+  margin-right: 15px; /* ラベルと次のラジオボタンの間に少しスペースを追加 */
+}
+
+.text-center {
+  text-align: center; /* テキストを中央に揃える */
+}
+
+.amount-input {
+  -moz-appearance: textfield; /* Firefox用 */
+  -webkit-appearance: number; /* Safari, Chrome用 */
+  appearance: textfield; /* その他ブラウザ用 */
 }
