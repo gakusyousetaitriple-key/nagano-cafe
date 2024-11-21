@@ -1,0 +1,56 @@
+<h1>注文履歴詳細</h1>
+<div class="container">
+  <%= form_with model: @order, url: admin_order_path(@order), method: :patch, local: true do |f| %>
+  <table class="table table-bordered">
+    <tr>
+      <td>購入者</td>
+      <td><%= @customer.name %></td>
+    </tr>
+    <tr>
+      <td>注文日</td>
+      <td><%= @order.created_at.strftime("%Y/%m/%d %H:%M") %></td>
+    </tr>
+    <tr>
+      <td>配送先</td>
+      <td><%= @order.address %>
+    </tr>
+    <tr>
+      <td>支払方法</td>
+      <td><%= @order.payment_method_i18n %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :is_order, "注文ステータス" %></td>
+      <td><%= f.select :is_order, Order.is_orders.keys.map { |key| [I18n.t("enums.order.is_order.#{key}"), key] }, {}, class: "form-control" %></td>
+      <td><%= f.hidden_field :customer_id, value: @customer.id %></td>
+      <td><%= f.submit "更新する", class: "btn btn-primary" %></td>
+    </tr>
+  </table>
+  <% end %>
+
+  <div class="order-details">
+  <div class="header row">
+    <div class="col">商品名</div>
+    <div class="col">単価(税込)</div>
+    <div class="col">数量</div>
+    <div class="col">小計</div>
+    <div class="col">制作ステータス</div>
+    <div class="col"></div>
+  </div>
+
+  <% @order_details.each do |detail| %>
+    <%= form_with(model: detail, url: admin_order_order_detail_path(detail.order_id, detail), method: :patch, local: true) do |f| %>
+      <div class="row">
+        <div class="col"><%= detail.item.name %></div>
+        <div class="col"><%= number_to_currency(detail.price) %></div>
+        <div class="col"><%= detail.quantity %></div>
+        <div class="col"><%= number_to_currency(detail.price * detail.quantity) %></div>
+        <div class="col">
+          <%= f.select :is_production, OrderDetail.is_productions.keys.map { |key| [I18n.t("enums.order_detail.is_production.#{key}"), key] }, {}, class: "form-control" %>
+        </div>
+        <div class="col">
+          <%= f.submit "更新", class: "btn btn-primary btn-sm" %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
