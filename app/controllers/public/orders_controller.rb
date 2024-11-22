@@ -6,48 +6,49 @@ class Public::OrdersController < ApplicationController
   end
 
   def confirm
-    # 注文情報を生成
-    @order = current_customer.orders.build(order_params)
-  
-    # お届け先を選択
-    case params[:order][:address_option]
-    when "0"
-      # 登録済み住所を使用
-      @order.address = current_customer.address
-      @order.post_code = current_customer.post_code
-      @order.name = "#{current_customer.last_name} #{current_customer.first_name}"
-    when "1"
-      # 選択した配送先住所を使用
-      address = current_customer.addresses.find_by(id: params[:address_id])
-      if address.nil?
-        flash[:alert] = "選択した配送先が見つかりません。"
-        redirect_to new_public_order_path
-        return
+    if request.post?
+      # 注文情報を生成
+      @order = current_customer.orders.build(order_params)
+    
+      # お届け先を選択
+      case params[:order][:address_option]
+      when "0"
+        @order.address = current_customer.address
+        @order.post_code = current_customer.post_code
+        @order.name = "#{current_customer.last_name} #{current_customer.first_name}"
+      when "1"
+        address = current_customer.addresses.find_by(id: params[:address_id])
+        if address.nil?
+          flash[:alert] = "選択した配送先が見つかりません。"
+          redirect_to new_public_order_path and return
+        end
+        @order.address = address.address
+        @order.post_code = address.post_code
+        @order.name = address.name
+      when "2"
+        @order.address = params[:order][:address]
+        @order.post_code = params[:order][:post_code]
+        @order.name = params[:order][:name]
+      else
+        flash[:alert] = "正しいお届け先を選択してください。"
+        redirect_to new_public_order_path and return
       end
-      @order.address = address.address
-      @order.post_code = address.post_code
-      @order.name = address.name
-    when "2"
-      # 新しい住所を使用
-      @order.address = params[:order][:address]
-      @order.post_code = params[:order][:post_code]
-      @order.name = params[:order][:name]
+  
+      # カートアイテムを取得
+      @cart_items = current_customer.cart_items
+  
+      # 合計金額と送料を計算
+      @order.postage = 800
+      @order.total_amount = @cart_items.sum { |cart_item| cart_item.item.price * cart_item.amount }
+  
+      # 注文確認ページを表示
     else
-      # 無効な選択肢
-      flash[:alert] = "正しいお届け先を選択してください。"
-      redirect_to new_public_order_path
-      return
-    end
-  
-    # カートアイテムを取得
-    @cart_items = current_customer.cart_items
-  
-    # 合計金額と送料を計算
-    @order.postage = 800 # 一律送料
-    @order.total_amount = @cart_items.sum do |cart_item|
-      cart_item.item.price * cart_item.amount
+      # GETリクエストの場合、前のページにリダイレクト
+      flash[:alert] = "注文情報が見つかりません。再度入力してください。"
+      redirect_to new_public_order_path and return
     end
   end
+  
   
   
   
@@ -95,8 +96,14 @@ class Public::OrdersController < ApplicationController
   end
 
   def show
-    @order = Order.find(params[:id])
-    @order_details = @order.order_details
+    begin
+      @order = Order.find(params[:id])
+      @order_details = @order.order_details
+    rescue ActiveRecord::RecordNotFound
+      # エラーメッセージを設定し、入力画面にリダイレクト
+      flash[:alert] = "申し訳ございません。再度入力してください。"
+      redirect_to new_public_order_path
+    end
   end
 
   private

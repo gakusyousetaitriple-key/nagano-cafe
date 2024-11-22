@@ -1,3 +1,144 @@
 // Place all the styles related to the public/orders controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+.order-item-image {
+  max-width: 100px;  /* 商品画像の幅を指定 */
+  height: auto;      /* 画像の高さを自動調整 */
+  object-fit: cover; /* 画像が枠に収まるように */
+}
+
+table {
+  width: 100%;
+  table-layout: fixed;  /* テーブルの列幅を固定 */
+}
+
+th, td {
+  vertical-align: middle;
+  text-align: center;
+}
+
+thead {
+  background-color: #f8f9fa; /* ヘッダーの背景色 */
+}
+
+th {
+  width: 20%;  /* 各列の幅を調整 */
+}
+
+td {
+  width: 20%;  /* データの幅を調整 */
+  
+}
+
+
+.mt-4 {
+  margin-top: 1.5rem;
+}
+
+h4 {
+  font-size: 1.25rem;
+}
+
+
+
+
+/* 注文ページ専用のスタイル */
+
+
+
+
+.order-page {
+  font-family: 'Arial', sans-serif;
+}
+
+/* 支払い方法 */
+.order-page__payment-method {
+  margin-bottom: 20px;
+}
+
+.order-page__radio-button {
+  margin-right: 10px;
+}
+
+/* お届け先 */
+.order-page__delivery-address {
+  margin-bottom: 20px;
+}
+
+.order-page__select {
+  font-size: 1.1rem;
+  padding: 0.75rem;
+  border-radius: 0.375rem;
+  border: 1px solid #ced4da;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.order-page__select:focus {
+  border-color: #80bdff;
+  box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.25);
+}
+
+/* 新規住所入力フォーム */
+.order-page__new-address {
+  margin-top: 20px;
+}
+
+.order-page__new-address .form-group {
+  margin-bottom: 15px;
+}
+
+.order-page__new-address label {
+  display: inline-block;
+  width: 200px; /* ラベルの幅を固定 */
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.order-page__new-address input {
+  display: inline-block;
+  width: calc(100% - 130px); /* ラベルの幅を引いてフォームフィールドを調整 */
+  padding: 0.75rem;
+  border-radius: 0.375rem;
+  border: 1px solid #ced4da;
+}
+
+.order-page__new-address .order-page__short-input {
+  width: 50%; /* 郵便番号と宛名のフォームフィールドの幅を短くする */
+}
+
+/* フォームフィールドのフォーカス時 */
+.order-page__input-field:focus {
+  border-color: #80bdff;
+  box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.25);
+}
+
+
+
+/* 注文履歴一覧テーブルのスタイル */
+.order-history-table {
+  width: 100%;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.order-history-table th {
+  font-weight: bold;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.order-history-table td {
+  vertical-align: middle;
+}
+
+.order-history-table td:last-child {
+  text-align: center;
+}
+
+/* ボタンのスタイル */
+.order-history-table .btn-primary {
+  padding: 0.25rem 0.75rem;
+  font-size: 0.875rem;
+}
+
+

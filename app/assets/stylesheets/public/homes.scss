@@ -1,3 +1,41 @@
 // Place all the styles related to the public/homes controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+.welcome-section {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.welcome-text {
+  background: rgba(0, 0, 0, 0.6); /* 半透明の背景 */
+  padding: 20px;
+  border-radius: 10px;
+  color: #fff; /* 白文字 */
+  font-size: 1.2rem;
+  text-align: center;
+  line-height: 1.8;
+}
+
+.product-table {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.product-item {
+  text-align: center;
+  padding: 10px;
+}
+
+.product-image {
+  width: 100%;
+  max-width: 200px;
+  border-radius: 10px;
+}
