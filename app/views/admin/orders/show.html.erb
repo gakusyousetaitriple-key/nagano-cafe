@@ -1,56 +1,76 @@
-<h1>注文履歴詳細</h1>
+<div><%= flash[:notice] %></div>
+<h4 class="bg-light px-3 py-2 mb-4" style="display: inline-block; margin-top: 20px; margin-left: 15%;">
+  注文履歴詳細
+</h4>
 <div class="container">
   <%= form_with model: @order, url: admin_order_path(@order), method: :patch, local: true do |f| %>
-  <table class="table table-bordered">
-    <tr>
-      <td>購入者</td>
-      <td><%= @customer.name %></td>
-    </tr>
-    <tr>
-      <td>注文日</td>
-      <td><%= @order.created_at.strftime("%Y/%m/%d %H:%M") %></td>
-    </tr>
-    <tr>
-      <td>配送先</td>
-      <td><%= @order.address %>
-    </tr>
-    <tr>
-      <td>支払方法</td>
-      <td><%= @order.payment_method_i18n %></td>
-    </tr>
-    <tr>
-      <td><%= f.label :is_order, "注文ステータス" %></td>
-      <td><%= f.select :is_order, Order.is_orders.keys.map { |key| [I18n.t("enums.order.is_order.#{key}"), key] }, {}, class: "form-control" %></td>
-      <td><%= f.hidden_field :customer_id, value: @customer.id %></td>
-      <td><%= f.submit "更新する", class: "btn btn-primary" %></td>
-    </tr>
+  <table class="table mb-4">
+    <tbody>
+      <tr>
+        <td><strong>購入者</strong></td>
+        <td><%= @customer.name %></td>
+      </tr>
+      <tr>
+        <td><strong>注文日</strong></td>
+        <td><%= @order.created_at.strftime("%Y/%m/%d %H:%M") %></td>
+      </tr>
+      <tr>
+        <td><strong>配送先</strong></td>
+        <td><%= @order.address %></td>
+      </tr>
+      <tr>
+        <td><strong>支払方法</strong></td>
+        <td><%= @order.payment_method_i18n %></td>
+      </tr>
+      <tr>
+        <td><%= f.label :is_order, "注文ステータス", class: "font-weight-bold" %></td>
+        <td><%= f.select :is_order, Order.is_orders.keys.map { |key| [I18n.t("enums.order.is_order.#{key}"), key] }, {}, class: "form-control" %></td>
+        <td colspan="2" class="text-left"><%= f.submit "更新する", class: "btn btn-primary" %></td>
+      </tr>
+    </tbody>
   </table>
   <% end %>
 
-  <div class="order-details">
-  <div class="header row">
-    <div class="col">商品名</div>
-    <div class="col">単価(税込)</div>
-    <div class="col">数量</div>
-    <div class="col">小計</div>
-    <div class="col">制作ステータス</div>
-    <div class="col"></div>
-  </div>
-
-  <% @order_details.each do |detail| %>
-    <%= form_with(model: detail, url: admin_order_order_detail_path(detail.order_id, detail), method: :patch, local: true) do |f| %>
-      <div class="row">
-        <div class="col"><%= detail.item.name %></div>
-        <div class="col"><%= number_to_currency(detail.price) %></div>
-        <div class="col"><%= detail.quantity %></div>
-        <div class="col"><%= number_to_currency(detail.price * detail.quantity) %></div>
-        <div class="col">
-          <%= f.select :is_production, OrderDetail.is_productions.keys.map { |key| [I18n.t("enums.order_detail.is_production.#{key}"), key] }, {}, class: "form-control" %>
-        </div>
-        <div class="col">
-          <%= f.submit "更新", class: "btn btn-primary btn-sm" %>
-        </div>
+  <div class="d-flex justify-content-between align-items-start" style="gap: 20px;">
+    <!-- 商品明細 -->
+    <div class="order-details w-75" style="margin-right: 20px;">
+      <div class="header row bg-light text-center mb-2" style="padding-bottom: 5px; border-bottom: 1px solid #ddd;">
+        <div class="col"><strong>商品名</strong></div>
+        <div class="col"><strong>単価（税込）</strong></div>
+        <div class="col"><strong>数量</strong></div>
+        <div class="col"><strong>小計</strong></div>
+        <div class="col" style="white-space: nowrap;"><strong>制作ステータス</strong></div>
+        <div class="col"></div>
       </div>
-    <% end %>
-  <% end %>
+
+      <% @order.order_details.each do |detail| %>
+        <%= form_with(model: detail, url: admin_order_order_detail_path(detail.order_id, detail), method: :patch, local: true) do |f| %>
+          <div class="row text-center mb-3">
+            <div class="col"><%= detail.item.name %></div>
+            <div class="col"><%= number_to_currency(detail.price) %></div>
+            <div class="col"><%= detail.quantity %></div>
+            <div class="col"><%= number_to_currency(detail.price * detail.quantity) %></div>
+            <div class="col">
+              <%= f.select :is_production, OrderDetail.is_productions.keys.map { |key| [I18n.t("enums.order_detail.is_production.#{key}"), key] }, {}, class: "form-control" %>
+            </div>
+            <div class="col">
+              <%= f.submit "更新", class: "btn btn-primary btn-sm" %> <!-- 更新ボタン -->
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+    <!-- 合計金額 -->
+    <div class="summary w-25 align-self-end">
+      <div>
+        <h5><strong>商品合計:</strong> <%= number_to_currency(@order.order_details.sum { |detail| detail.price * detail.quantity }) %></h5>
+      </div>
+      <div>
+        <h5><strong>送料:</strong> <%= number_to_currency(@order.postage) %></h5>
+      </div>
+      <div>
+        <h5><strong>請求合計金額:</strong> <%= number_to_currency(@order.order_details.sum { |detail| detail.price * detail.quantity } + @order.postage) %></h5>
+      </div>
+    </div>
+  </div>
 </div>
