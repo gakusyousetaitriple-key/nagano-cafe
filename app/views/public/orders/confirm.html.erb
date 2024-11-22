@@ -1,23 +1,65 @@
-<h3>注文内容確認</h3>
-<p>お届け先: <%= @order.post_code %> <%= @order.address %> <%= @order.name %></p>
-<p>支払い方法: <%= @order.payment_method == "credit_card" ? "クレジットカード" : "銀行振込" %></p>
+<div class="container">
+  <h1>注文内容確認</h1>
 
-<h4>注文商品一覧</h4>
-<% @cart_items.each do |cart_item| %>
-  <p><%= cart_item.item.name %>: <%= cart_item.amount %>個</p>
-<% end %>
+  <div class="d-flex" style="gap: 20px;">
+  <!-- 注文商品一覧のテーブル -->
+  <div class="order-items" style="flex: 7;">
+    <h4>注文商品一覧</h4>
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>商品画像</th>
+          <th>商品名</th>
+          <th>数量</th>
+          <th>小計</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @cart_items.each do |cart_item| %>
+          <tr>
+            <td><%= image_tag cart_item.item.image, alt: cart_item.item.name, class: "order-item-image" %></td>
+            <td><%= cart_item.item.name %></td>
+            <td><%= cart_item.amount %>個</td>
+            <td><%= number_to_currency(cart_item.item.price * cart_item.amount) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 
-<%= form_with model: @order, url: public_orders_path, method: :post do |f| %>
-  <%= f.hidden_field :address, value: @order.address %>
-  <%= f.hidden_field :post_code, value: @order.post_code %>
-  <%= f.hidden_field :name, value: @order.name %>
-  <%= f.hidden_field :payment_method, value: @order.payment_method %>
+  <!-- 注文内容の合計金額 -->
+  <div class="order-summary" style="flex: 3;">
+    <h4>注文内容の合計金額</h4>
+    <table class="table">
+      <tr>
+        <th>配送料</th>
+        <td><%= number_to_currency(@order.postage, unit: "円") %></td>
+      </tr>
+      <tr>
+        <th>合計金額</th>
+        <td><%= number_to_currency(@order.total_amount, unit: "円") %></td>
+      </tr>
+      <tr>
+        <th>注文金額</th>
+        <td><%= number_to_currency(@order.total_amount + @order.postage, unit: "円") %></td>
+      </tr>
+    </table>
+  </div>
+</div>
 
-  <!-- 注文内容の合計金額などの表示 -->
-  <p>合計金額: <%= number_to_currency(@order.total_amount, unit: "円") %></p>
-  <p>送料: <%= number_to_currency(@order.postage, unit: "円") %></p>
-  <p>注文金額: <%= number_to_currency(@order.total_amount + @order.postage, unit: "円") %></p>
-  
 
-  <%= f.submit "注文を確定する" %>
-<% end %>
+  <div class="order-details mt-4">
+    <h4>お届け先と支払方法</h4>
+    <p>お届け先: 〒<%= @order.post_code %> <%= @order.address %> <%= @order.name %></p>
+    <p>支払い方法: <%= @order.payment_method == "credit_card" ? "クレジットカード" : "銀行振込" %></p>
+  </div>
+
+  <%= form_with model: @order, url: public_orders_path, method: :post do |f| %>
+    <%= f.hidden_field :address, value: @order.address %>
+    <%= f.hidden_field :post_code, value: @order.post_code %>
+    <%= f.hidden_field :name, value: @order.name %>
+    <%= f.hidden_field :payment_method, value: @order.payment_method %>
+
+    <%= f.submit "注文を確定する", class: "btn btn-success mt-3" %>
+  <% end %>
+</div>

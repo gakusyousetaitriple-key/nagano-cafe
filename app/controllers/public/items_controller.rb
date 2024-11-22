@@ -9,8 +9,15 @@ class Public::ItemsController < ApplicationController
     end
   end
 
+  # 2024年11月22日10時修正　非ログイン対応
   def show
     @item = Item.find(params[:id])
-    @cart_item = current_customer.cart_items.find_or_initialize_by(item_id: @item.id) # 修正箇所
+  
+    # current_customerがnilの場合でも、cart_itemの処理をスキップ
+    if current_customer
+      @cart_item = current_customer.cart_items.find_or_initialize_by(item_id: @item.id)
+    else
+      @cart_item = nil
+    end
   end
 end
