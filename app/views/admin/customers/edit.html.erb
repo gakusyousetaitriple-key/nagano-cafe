@@ -1,50 +1,70 @@
-<h3><%= @customer.last_name + " " + @customer.first_name + "さんの会員情報編集" %></h3>
-<%= form_with model:@customer,url:admin_customer_path(@customer),method: :patch do |f| %>
-<table class="table">
-  <tr>
-    <td><%= "会員ID" %></td>
-    <td><%= @customer.id %></td>
-  </tr>
-    <tr>
-      <td><%= f.label :"氏名" %></td>
-      <td><%= f.text_field :last_name, class: "form-control name" %></td>
-      <td><%= f.text_field :first_name, class: "form-control name" %></td>
-    </tr>
-    <tr>
-      <td><%= f.label :"フリガナ" %></td>
-      <td><%= f.text_field :kana_last_name, class: "form-control name" %></td>
-      <td><%= f.text_field :kana_first_name, class: "form-control name" %></td>
-    </tr>
-    <tr>
-      <td><%= f.label :"郵便番号" %></td>
-      <td><%= f.text_field :post_code, class: "form-control name" %></td>
-    </tr>
-    <tr>
-      <td><%= f.label :"住所" %></td>
-      <td><%= f.text_field :address, class: "form-control name" %></td>
-    </tr>
-    <tr>
-      <td><%= f.label :"電話番号" %></td>
-      <td><%= f.text_field :telephone_number, class: "form-control name" %></td>
-    </tr>
-    <tr>
-      <td><%= f.label :"メールアドレス" %></td>
-      <td><%= f.text_field :email, class: "form-control name" %></td>
-    </tr>
-    <tr>
-      <td><%= f.label :"会員ステータス" %></td>
-      <td>
-        <%= f.radio_button :is_active, "true" %>
-        <%= f.label :is_active, "有効" %>
-      </td>
-      <td>
-        <%= f.radio_button :is_active, "false" %>
-        <%= f.label :is_active, "退会" %>
-      </td>
-    </tr>
-    <tr>
-      <td></td>
-      <td><%= f.submit "編集内容を保存",class: "btn btn-success" %></td>
-    </tr>
-</table>
+<h3 class="mb-4"><%= @customer.last_name + " " + @customer.first_name + "さんの会員情報編集" %></h3>
+
+<%= form_with model: @customer, url: admin_customer_path(@customer), method: :patch, class: "needs-validation" do |f| %>
+  <div class="container">
+    <div class="row mb-3">
+      <label class="col-sm-3 col-form-label">会員ID</label>
+      <div class="col-sm-9">
+        <p class="form-control-plaintext"><%= @customer.id %></p>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label class="col-sm-3 col-form-label"><%= f.label :last_name, "氏名" %></label>
+      <div class="col-sm-4">
+        <%= f.text_field :last_name, id: "customer_last_name", class: "form-control" %>
+      </div>
+      <div class="col-sm-4">
+        <%= f.text_field :first_name, id: "customer_first_name", class: "form-control" %>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label class="col-sm-3 col-form-label"><%= f.label :kana_last_name, "フリガナ" %></label>
+      <div class="col-sm-4">
+        <%= f.text_field :kana_last_name, id: "customer_kana_last_name", class: "form-control" %>
+      </div>
+      <div class="col-sm-4">
+        <%= f.text_field :kana_first_name, id: "customer_kana_first_name", class: "form-control" %>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label class="col-sm-3 col-form-label"><%= f.label :post_code, "郵便番号" %></label>
+      <div class="col-sm-9">
+        <%= f.text_field :post_code, id: "customer_post_code", class: "form-control" %>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label class="col-sm-3 col-form-label"><%= f.label :address, "住所" %></label>
+      <div class="col-sm-9">
+        <%= f.text_field :address, id: "customer_address", class: "form-control" %>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label class="col-sm-3 col-form-label"><%= f.label :telephone_number, "電話番号" %></label>
+      <div class="col-sm-9">
+        <%= f.text_field :telephone_number, id: "customer_telephone_number", class: "form-control" %>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label class="col-sm-3 col-form-label"><%= f.label :email, "メールアドレス" %></label>
+      <div class="col-sm-9">
+        <%= f.text_field :email, id: "customer_email", class: "form-control" %>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label class="col-sm-3 col-form-label"><%= f.label :is_active, "会員ステータス" %></label>
+      <div class="col-sm-9">
+        <div class="form-check form-check-inline">
+          <%= f.radio_button :is_active, true, id: "customer_is_active_true", class: "form-check-input" %>
+          <%= f.label :is_active, "有効", for: "customer_is_active_true", class: "form-check-label" %>
+        </div>
+        <div class="form-check form-check-inline">
+          <%= f.radio_button :is_active, false, id: "customer_is_active_false", class: "form-check-input" %>
+          <%= f.label :is_active, "退会", for: "customer_is_active_false", class: "form-check-label" %>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-4">
+      <%= f.submit "変更を保存", class: "btn btn-success px-4" %>
+    </div>
+  </div>
 <% end %>

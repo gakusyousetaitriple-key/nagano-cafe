@@ -1,20 +1,28 @@
-<h1>配送先編集</h1>
+<h1 class="form-title mb-4 text-center">配送先編集</h1>
 
-<%= form_with model: @address, url: public_address_path(@address), method: :patch, local: true do |f| %>
-  <div>
-    <%= f.label :name, '名前' %>
-    <%= f.text_field :name %>
-  </div>
-  <div>
-    <%= f.label :post_code, '郵便番号' %>
-    <%= f.text_field :post_code %>
-  </div>
-  <div>
-    <%= f.label :address, '住所' %>
-    <%= f.text_field :address %>
-  </div>
-  <%= f.submit '更新する' %>
-<% end %>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <%= form_with model: @address, url: public_address_path(@address), method: :patch, local: true, class: "edit-form" do |f| %>
+        <div class="mb-3">
+          <%= f.label :post_code, '郵便番号(ハイフンなし)', class: "form-label" %>
+          <%= f.text_field :post_code, class: "form-control", placeholder: "例: 1234567" %>
+        </div>
 
-<%= link_to '一覧に戻る', public_addresses_path %>
+        <div class="mb-3">
+          <%= f.label :address, '住所', class: "form-label" %>
+          <%= f.text_field :address, class: "form-control", placeholder: "住所を入力してください" %>
+        </div>
 
+        <div class="mb-3">
+          <%= f.label :name, '宛名', class: "form-label" %>
+          <%= f.text_field :name, class: "form-control", placeholder: "宛名を入力してください" %>
+        </div>
+
+        <div class="form-actions mt-3">
+          <%= f.submit '変更内容を保存', class: "btn btn-primary w-100" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

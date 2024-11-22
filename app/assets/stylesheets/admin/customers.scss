@@ -1,3 +1,50 @@
-// Place all the styles related to the admin/customers controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
+/* テーブルのコンテナを中央寄せ */
+.table-container {
+  margin: 0 auto; /* 水平方向中央寄せ */
+  width: 60%; /* 幅を画面の60%に */
+  text-align: center; /* 中央寄せ */
+}
+
+/* テーブルスタイル */
+.table {
+  background-color: transparent; /* 背景色を透明に設定 */
+  width: 100%; /* コンテナの幅に合わせる */
+  border-collapse: collapse; /* 枠をまとめる */
+  margin-top: 20px; /* 上に余白を作る */
+}
+
+/* テーブルのヘッダー */
+.table th {
+  background-color: #f0f0f0; /* ヘッダーの背景色 */
+  padding: 10px;
+  border: 1px solid #ccc; /* 枠線 */
+}
+
+/* テーブルのセル */
+.table td {
+  padding: 10px;
+  border: 1px solid #ccc; /* 枠線 */
+  background-color: transparent; /* セルの背景色を透明に設定 */
+}
+
+/* ボタンのスタイル */
+.button-container {
+  text-align: left; /* 左寄せ */
+  margin-top: 20px;
+  margin-left: 30px; /* ボタンにも左側のスペースを追加 */
+}
+
+.btn-success {
+  background-color: #28a745;
+  color: white;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 1em;
+  border: none;
+}
+
+.btn-success:hover {
+  background-color: #218838;
+}
+
