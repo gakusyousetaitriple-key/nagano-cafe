@@ -1,10 +1,10 @@
 <h3><%= @customer.last_name + " " + @customer.first_name + "さんの会員情報編集" %></h3>
-<%= form_with model:@customer,url:admin_customer_path(@customer),method: :patch do |f| %>
 <table class="table">
   <tr>
     <td><%= "会員ID" %></td>
     <td><%= @customer.id %></td>
   </tr>
+  <%= form_with model:@customer,url:admin_customer_path(@customer),method: :patch do |f| %>
     <tr>
       <td><%= f.label :"氏名" %></td>
       <td><%= f.text_field :last_name, class: "form-control name" %></td>
@@ -46,5 +46,5 @@
       <td></td>
       <td><%= f.submit "編集内容を保存",class: "btn btn-success" %></td>
     </tr>
+  <% end %>
 </table>
-<% end %>

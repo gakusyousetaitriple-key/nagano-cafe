@@ -1,5 +1,10 @@
-<h3>注文履歴一覧</h3>
-<div class="container">
+<div class="container mt-4">
+  <!-- タイトル -->
+  <div class="d-inline-block bg-light px-3 py-2 mb-4">
+    <h3 style="margin: 0;">注文履歴一覧</h3>
+  </div>
+
+  <!-- 注文履歴テーブル -->
   <table class="table table-bordered">
     <thead>
       <tr>
@@ -20,4 +25,9 @@
       <% end %>
     </tbody>
   </table>
+
+  <!-- ページネーション -->
+  <div class="d-flex justify-content-center">
+    <%= paginate @orders %>
+  </div>
 </div>
