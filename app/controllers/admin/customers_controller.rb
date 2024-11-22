@@ -19,8 +19,7 @@ class Admin::CustomersController < ApplicationController
   
   def orders
     @customer = Customer.find(params[:id])
-    @orders = @customer.orders
-    @orders = @customer.orders.order(created_at: :desc)
+    @orders = @customer.orders.order(created_at: :desc).page(params[:page]).per(10)  # 1ページ10件表示
   end
   
   private

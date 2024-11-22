@@ -1,6 +1,4 @@
-<h1>注文履歴</h1>
-
-<h2>顧客: <%= @customer.name + "さんの注文履歴" %></h2>
+<h4 class="bg-light p-2 mb-4 pl-3" style="display: inline-block; margin-top: 20px;"><%= @customer.name + "さんの注文履歴" %></h4>
 <div class="container">
   <table class="table table-bordered">
     <thead>
@@ -15,9 +13,14 @@
         <tr>
           <td><%= order.created_at.strftime("%Y/%m/%d %H:%M") %></td>
           <td><%= order.order_details.sum(:quantity) %></td>
-          <td><%= link_to order.is_order_i18n, admin_order_path(order.customer.id) %></td>
+          <td><%= link_to order.is_order_i18n, admin_order_path(order.id) %></td>  <!-- 修正: order.customer.id -> order.id -->
         </tr>
       <% end %>
     </tbody>
   </table>
+
+  <!-- ページネーション -->
+  <div class="d-flex justify-content-center mt-4">
+    <%= paginate @orders %>
+  </div>
 </div>
