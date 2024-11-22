@@ -1,56 +1,64 @@
-<h2>新規配送先の追加</h2>
+<h2 class="mb-4 text-center">配送先登録/一覧</h2>
 
-<%= form_with model: @address, url: public_addresses_path, local: true do |f| %>
+<div class="container">
+  <!-- フォーム部分 -->
+  <%= form_with model: @address, url: public_addresses_path, local: true do |f| %>
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="form-section mb-4">
+          <div class="mb-3">
+            <%= f.label :post_code, '郵便番号(ハイフンなし)', class: "form-label" %>
+            <%= f.text_field :post_code, class: "form-control", placeholder: "例: 1234567" %>
+          </div>
 
-  <div>
-    <%= f.label :post_code, '郵便番号' %>
-    <%= f.text_field :post_code %>
-  </div>
+          <div class="mb-3">
+            <%= f.label :address, '住所', class: "form-label" %>
+            <%= f.text_field :address, class: "form-control", placeholder: "住所を入力してください" %>
+          </div>
 
-  <div>
-    <%= f.label :address, '住所' %>
-    <%= f.text_field :address %>
-  </div>
+          <div class="mb-3">
+            <%= f.label :name, '宛名', class: "form-label" %>
+            <%= f.text_field :name, class: "form-control", placeholder: "宛名を入力してください" %>
+          </div>
 
-  <div>
-    <%= f.label :name, '名前' %>
-    <%= f.text_field :name %>
-  </div>
+          <%= f.submit '新規登録', class: "btn btn-primary w-100" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
 
-  <%= f.submit '追加' %>
-<% end %>
-
-
-
-<h1>配送先一覧</h1>
-
-<% if @addresses.any? %>
-  <table>
-    <thead>
-      <tr>
-        <th>名前</th>
-        <th>郵便番号</th>
-        <th>住所</th>
-        <th>操作</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @addresses.each do |address| %>
-        <tr>
-          <td><%= address.name %></td>
-          <td><%= address.post_code %></td>
-          <td><%= address.address %></td>
-          <td>
-            <%= link_to '編集', edit_public_address_path(address) %> |
-            <%= button_to '削除', public_address_path(address), method: :delete, data: { confirm: '削除してもよろしいですか？' }, class: 'btn btn-danger' %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-<% else %>
-  <p>登録された配送先がありません。</p>
-<% end %>
-
-
-
+  <!-- 配送先一覧部分 -->
+  <% if @addresses.any? %>
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="table-responsive">
+          <table class="table table-sm table-striped table-bordered">
+            <thead class="thead-dark">
+              <tr>
+                <th>宛名</th>
+                <th>郵便番号</th>
+                <th>住所</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @addresses.each do |address| %>
+                <tr>
+                  <td><%= address.name %></td>
+                  <td><%= address.post_code %></td>
+                  <td><%= address.address %></td>
+                  <td>
+                    <%= link_to '編集する', edit_public_address_path(address), class: "btn btn-warning btn-sm" %> |
+                    <%= button_to '削除する', public_address_path(address), method: :delete, data: { confirm: '削除してもよろしいですか？' }, class: 'btn btn-danger btn-sm' %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  <% else %>
+    <p class="text-center">登録された配送先がありません。</p>
+  <% end %>
+</div>

@@ -1,3 +1,205 @@
-// Place all the styles related to the public/addresses controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
+// /* フォームのレイアウト */
+// .form-section {
+//   margin-bottom: 30px;
+//   padding: 20px;
+//   border-radius: 8px;
+//   width: 60%; /* フォームの幅を60%に設定 */
+//   margin-left: 20%; /* 左側に余白を追加 */
+//   margin-right: 20%; /* 右側に余白を追加 */
+//   box-sizing: border-box; /* パディングを含めた幅調整 */
+//   background-color: transparent; /* 背景色を削除 */
+// }
+
+// .form-table {
+//   width: 100%;
+//   table-layout: fixed; /* 各列を均等に固定 */
+// }
+
+// .form-table td {
+//   padding: 5px 10px; /* ラベルと入力欄の間の距離を縮める */
+//   vertical-align: middle;
+// }
+
+// .form-input {
+//   width: 100%;
+//   padding: 8px;
+//   margin-top: 5px;
+//   border: 1px solid #ccc;
+//   border-radius: 4px;
+// }
+
+// /* ボタンのスタイル */
+// .btn {
+//   padding: 10px 20px;
+//   border-radius: 5px;
+// }
+
+// .btn-primary {
+//   background-color: #007bff;
+//   color: #fff;
+// }
+
+// .btn-primary:hover {
+//   background-color: #0056b3;
+// }
+
+// .btn-warning {
+//   background-color: #ffc107;
+//   color: #fff;
+// }
+
+// .btn-warning:hover {
+//   background-color: #e0a800;
+// }
+
+// .btn-danger {
+//   background-color: #dc3545;
+//   color: #fff;
+// }
+
+// .btn-danger:hover {
+//   background-color: #c82333;
+// }
+
+// /* 配送先一覧のテーブルのスタイル */
+// .table-responsive {
+//   overflow-x: auto;
+//   margin-top: 20px;
+//   width: 70%; /* 配送先一覧の幅を70%に設定 */
+//   margin-left: 0; /* 左寄せにするため、余白を削除 */
+//   box-sizing: border-box; /* パディングを含めた幅調整 */
+// }
+
+// .table {
+//   width: 100%;
+//   border-collapse: collapse;
+//   background-color: #fff;
+//   text-align: left; /* テーブル内容を左寄せに */
+// }
+
+// .table th, .table td {
+//   padding: 15px;
+//   text-align: left;
+// }
+
+// .table-striped tbody tr:nth-child(odd) {
+//   background-color: #f2f2f2;
+// }
+
+// .table-bordered {
+//   border: 1px solid #ddd;
+// }
+
+// .table th {
+//   background-color: #f8f9fa;
+// }
+
+// .table td, .table th {
+//   border: 1px solid #ddd;
+// }
+
+// /* モバイル対応 */
+// @media (max-width: 768px) {
+//   .form-section, .table-responsive {
+//     width: 100%; /* モバイル画面ではフォームとテーブルの幅を100%に */
+//     margin-left: 0; /* 左側余白を削除 */
+//     margin-right: 0; /* 右側余白も削除 */
+//   }
+// }
+
+// /* 配送先登録/一覧タイトルの配置 */
+// h2 {
+//   margin-left: 20%; /* 左側に余白を追加 */
+//   margin-right: 0; /* 右側の余白はデフォルト通り */
+//   padding-bottom: 10px; /* 下に少し余白を追加 */
+//   text-align: left; /* 文字を左寄せにする */
+//   font-size: 1.8rem; /* フォントサイズ調整（お好みで変更） */
+// }
+
+// // editページのcssです
+// /* フォーム全体のレイアウト */
+// .edit-form {
+//   width: 50%; /* フォームの幅 */
+//   margin: 0 auto; /* フォームを中央配置 */
+//   margin-left: 15%; /* 左側に余白を設定 (中央配置から少し左寄せ) */
+//   padding: 20px;
+//   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 軽い影を追加 */
+//   border-radius: 8px; /* 角を丸くする */
+//   background-color: #fff; /* 背景を白に設定 */
+//   box-sizing: border-box;
+// }
+
+
+// /* 入力フィールドとラベルのスタイル */
+// .form-group {
+//   display: flex; /* フレックスボックスで横並び */
+//   justify-content: space-between; /* ラベルと入力欄を両端に配置 */
+//   align-items: center; /* 垂直方向の中央揃え */
+//   margin-bottom: 15px;
+// }
+
+// .form-label {
+//   flex: 0 0 30%; /* ラベルの幅を30%に設定 */
+//   font-weight: bold;
+// }
+
+// .form-input {
+//   flex: 1; /* 入力欄の幅をラベル以外の領域に合わせる */
+//   padding: 8px;
+//   border: 1px solid #ccc;
+//   border-radius: 4px;
+//   box-sizing: border-box;
+// }
+
+// /* ボタンのスタイル */
+// .btn {
+//   display: inline-block;
+//   padding: 10px 20px;
+//   border-radius: 5px;
+//   text-align: center;
+//   text-decoration: none;
+//   font-size: 1rem;
+//   cursor: pointer;
+// }
+
+// .btn-primary {
+//   background-color: #007bff;
+//   color: white;
+//   border: none;
+// }
+
+// .btn-primary:hover {
+//   background-color: #0056b3;
+// }
+
+// /* 一覧に戻るリンクのスタイル */
+// .btn-link {
+//   display: inline-block;
+//   color: #007bff;
+//   text-decoration: none;
+//   font-size: 1rem;
+// }
+
+// .btn-link:hover {
+//   text-decoration: underline;
+// }
+
+// /* フォーム全体のリンク配置 */
+// .link-back {
+//   text-align: center;
+//   margin-top: 20px;
+// }
+
+// /* 配送先編集タイトルのスタイル */
+// h1 {
+//   text-align: left; /* 左寄せのまま */
+//   margin-left: 20%; /* 文字を右に寄せるため左に余白を追加 */
+//   font-size: 1.8rem; /* フォントサイズをお好みで調整 */
+//   margin-bottom: 20px; /* 下に余白を追加して見やすくする */
+// }
+
+// /* ボタンを中央寄せするためのコンテナ */
+// .form-actions {
+//   text-align: center; /* 内部の要素を中央寄せ */
+//   margin-top: 20px; /* 上部に余白を追加 */
+// }

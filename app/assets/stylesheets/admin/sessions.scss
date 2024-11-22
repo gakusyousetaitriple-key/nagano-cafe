@@ -1,0 +1,52 @@
+/* ログインページ専用のフォームスタイル */
+body.login-page form {
+  width: 50%;               /* フォームの幅を画面の50%に設定 */
+  margin: 0 auto;           /* フォームを中央寄せ */
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+}
+
+/* ログインページ専用のフォームの入力フィールド */
+body.login-page .form-input {
+  width: 100%;              /* 入力フィールドの幅を100%に設定 */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-top: 5px;
+  font-size: 16px;
+}
+
+/* ログインページ専用のラベルのスタイル */
+body.login-page .field label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: block;
+}
+
+/* ログインページ専用のログインボタンのスタイル */
+body.login-page .actions input[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+body.login-page .actions input[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+/* ログインページ専用のチェックボックスのラベル */
+body.login-page .field input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+/* ログインページ専用のタイトル */
+body.login-page h2 {
+  margin-left: 200px;
+}

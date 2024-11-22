@@ -1,4 +1,7 @@
-<h3>ご注文ありがとうございました！</h3>
-<p>またのご利用をお待ちしております。</p>
-<%= link_to "トップページへ戻る", top_path %>
-
+<div class="order-complete">
+  <h3>ご注文ありがとうございました！</h3>
+  <p>またのご利用をお待ちしております。</p>
+  <div class="return-link">
+    <%= link_to "トップページへ戻る", top_path, class: "btn-return" %>
+  </div>
+</div>
