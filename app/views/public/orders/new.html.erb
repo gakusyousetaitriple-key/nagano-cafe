@@ -1,29 +1,72 @@
-<h1>注文情報入力</h1>
+<div class="container order-page">
+<%= flash[:alert] %>
+  <h1>注文情報入力</h1>
 
-<%= form_with model: @order, url: confirm_public_orders_path, method: :post do |f| %>
-  <div>
-    <h3>お届け先</h3>
-    
-    <!-- 登録済み住所 -->
-    <label><%= f.radio_button :address_option, "0" %> 登録済み住所：<%= current_customer.address %></label><br>
-    
-    <!-- 配送先住所選択 -->
-    <label><%= f.radio_button :address_option, "1" %> 配送先住所選択：
-      <%= select_tag :address_id, options_from_collection_for_select(current_customer.addresses, :id, :address), prompt: "配送先住所を選択" %>
-    </label><br>
-    
-    <!-- 新規住所 -->
-    <label><%= f.radio_button :address_option, "2" %> 新規住所</label><br>
-    <%= text_field_tag 'order[address]', nil, placeholder: "住所" %><br>
-    <%= text_field_tag 'order[post_code]', nil, placeholder: "郵便番号" %><br>
-    <%= text_field_tag 'order[name]', nil, placeholder: "名前" %><br>
-  </div>
+  <%= form_with model: @order, url: confirm_public_orders_path, method: :post do |f| %>
   
-  <div>
-    <h3>支払い方法</h3>
-    <label><%= f.radio_button :payment_method, "credit_card" %> クレジットカード</label><br>
-    <label><%= f.radio_button :payment_method, "bank_transfer" %> 銀行振込</label>
-  </div>
+    <!-- 支払い方法 -->
+    <div class="order-page__payment-method">
+      <h4>支払い方法</h4>
+      <div class="form-check">
+        <%= f.radio_button :payment_method, "credit_card", id: "credit_card", class: "form-check-input order-page__radio-button" %>
+        <label for="credit_card" class="form-check-label">クレジットカード</label><br>
 
-  <%= f.submit "確認画面へ進む" %>
-<% end %>
+        <%= f.radio_button :payment_method, "bank_transfer", id: "bank_transfer", class: "form-check-input order-page__radio-button" %>
+        <label for="bank_transfer" class="form-check-label">銀行振込</label>
+      </div>
+    </div>
+
+    <!-- お届け先 -->
+    <div class="order-page__delivery-address">
+      <h4>お届け先</h4>
+      <div class="form-check">
+
+        <%= f.radio_button :address_option, "0", id: "registered_address", class: "form-check-input order-page__radio-button" %>
+        <label for="registered_address" class="form-check-label">
+          登録済み住所：<br>
+          〒<%= current_customer.post_code %>  <%= current_customer.address %><br>
+          <%= current_customer.last_name %> <%= current_customer.first_name  %>
+        </label><br>
+
+        <%= f.radio_button :address_option, "1", id: "address_select", class: "form-check-input order-page__radio-button" %>
+        <label for="address_select" class="form-check-label">
+          配送先住所選択：
+          <!-- プルダウンのカスタムデザイン -->
+           <%= select_tag :address_id, 
+              options_from_collection_for_select(
+                current_customer.addresses, 
+                :id, 
+                lambda { |address| "〒#{address.post_code} #{address.address} (#{address.name})" }
+              ), 
+              prompt: "配送先住所を選択", class: "form-select order-page__select" %>
+
+        </label><br>
+
+        <%= f.radio_button :address_option, "2", id: "new_address", class: "form-check-input order-page__radio-button" %>
+        <label for="new_address" class="form-check-label">新規住所</label><br>
+
+        <!-- 新規住所入力フォーム -->
+        <div id="new_address_fields" class="order-page__new-address mt-3">
+        <div class="form-group">
+          <label for="order_post_code">郵便番号（ハイフンなし）</label>
+          <%= text_field_tag 'order[post_code]', nil, placeholder: "郵便番号", class: 'form-control order-page__input-field order-page__short-input' %>
+        </div>
+        
+        <div class="form-group">
+          <label for="order_address">住所</label>
+          <%= text_field_tag 'order[address]', nil, placeholder: "住所", class: 'form-control order-page__input-field order-page__short-input' %>
+        </div>
+        
+        <div class="form-group">
+          <label for="order_name">宛名</label>
+          <%= text_field_tag 'order[name]', nil, placeholder: "名前", class: 'form-control order-page__input-field order-page__short-input' %>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-center mt-3">
+      <%= f.submit "確認画面へ進む", class: 'btn btn-primary order-page__submit-btn' %>
+    </div>
+  <% end %>
+</div>

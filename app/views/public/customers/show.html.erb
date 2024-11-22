@@ -1,42 +1,98 @@
-<h3>マイページ</h3>
-<div class="row">
-  <div class="col-3"><h3>登録情報</h3></div>
-  <div class="col-2">
-    <%= link_to "編集する", edit_public_customer_path(@customer), class: "btn btn-success" %>
+<style>
+  .page-title {
+    display: inline-block;
+    background-color: #f0f0f0;
+    padding: 10px;
+    margin-left: 10px;
+    margin-bottom: 20px; /* 下部の余白を追加 */
+  }
+
+  .table-header {
+    background-color: #f0f0f0;
+  }
+
+  /* テーブル線の色を黒に変更 */
+  .table-bordered {
+    border: 2px solid black; /* テーブル全体の外枠 */
+  }
+
+  .table-bordered th,
+  .table-bordered td {
+    border: 1px solid black; /* セルの区切り線 */
+  }
+
+  .btn-left {
+    margin-left: -10px;
+  }
+</style>
+
+<div class="container mt-4 mb-4">
+  <!-- マイページタイトル -->
+  <div class="page-title">
+    <h3 style="margin: 0;">マイページ</h3>
   </div>
-  <div class="col-8"></div>
+
+  <!-- 登録情報 -->
+  <div class="row mb-3 align-items-center">
+    <div class="col-md-3">
+      <h3>登録情報</h3>
+    </div>
+    <div class="col-md-2 btn-left">
+      <%= link_to "編集する", edit_public_customer_path(@customer), class: "btn btn-success" %>
+    </div>
+  </div>
+
+  <!-- テーブルの表示 -->
+  <div class="row">
+    <div class="col-md-8">
+      <table class="table table-bordered">
+        <tr>
+          <td class="table-header"><%= "氏名" %></td>
+          <td><%= @customer.last_name %></td>
+          <td><%= @customer.first_name %></td>
+        </tr>
+        <tr>
+          <td class="table-header"><%= "カナ" %></td>
+          <td><%= @customer.kana_last_name %></td>
+          <td><%= @customer.kana_first_name %></td>
+        </tr>
+        <tr>
+          <td class="table-header"><%= "郵便番号" %></td>
+          <td colspan="2"><%= @customer.post_code %></td>
+        </tr>
+        <tr>
+          <td class="table-header"><%= "住所" %></td>
+          <td colspan="2"><%= @customer.address %></td>
+        </tr>
+        <tr>
+          <td class="table-header"><%= "電話番号" %></td>
+          <td colspan="2"><%= @customer.telephone_number %></td>
+        </tr>
+        <tr>
+          <td class="table-header"><%= "メールアドレス" %></td>
+          <td colspan="2"><%= @customer.email %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- 配送先 -->
+  <div class="row mt-4 align-items-center">
+    <div class="col-md-3">
+      <h3>配送先</h3>
+    </div>
+    <div class="col-md-3 btn-left">
+      <%= link_to "一覧を見る", public_addresses_path, class: "btn btn-primary" %>
+    </div>
+  </div>
+
+  <!-- 注文一覧 -->
+  <div class="row mt-4 align-items-center">
+    <div class="col-md-3">
+      <h3>注文一覧</h3>
+    </div>
+    <div class="col-md-3 btn-left">
+      <%= link_to "一覧を見る", public_orders_path, class: "btn btn-primary" %>
+    </div>
+  </div>
 </div>
-<table class="table">
-  <tr>
-    <td><%= "氏名" %></td>
-    <td><%= @customer.last_name %></td>
-    <td><%= @customer.first_name %></td>
-  </tr>
-  <tr>
-    <td><%= "カナ" %></td>
-    <td><%= @customer.kana_last_name %></td>
-    <td><%= @customer.kana_first_name %></td>
-  </tr>
-  <tr>
-    <td><%= "郵便番号" %></td>
-    <td><%= @customer.post_code %></td>
-  </tr>
-  <tr>
-    <td><%= "住所" %></td>
-    <td><%= @customer.address %></td>
-  </tr>
-  <tr>
-    <td><%= "電話番号" %></td>
-    <td><%= @customer.telephone_number %></td>
-  </tr>
-  <tr>
-    <td><%= "メールアドレス" %></td>
-    <td><%= @customer.email %></td>
-  </tr>
-</table>
-<h3>配送先</h3>
-<%= link_to "配送先一覧", public_addresses_path %>
-
-<h3>注文一覧</h3>
-<%= link_to "注文履歴一覧", public_orders_path %>
-

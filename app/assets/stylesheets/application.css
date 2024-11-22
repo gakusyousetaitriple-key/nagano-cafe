@@ -13,4 +13,142 @@
  *= require_tree .
  *= require_self
  */
+/* ヘッダー全体 */
+header {
+  background-color: #f8f9fa;
+  padding: 20px 0; /* 高さを確保するためのパディングを増加 */
+  border-bottom: 2px solid #ddd; /* 下線 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 任意で影を追加 */
+}
+
+/* ヘッダー内のコンテナ */
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ロゴ部分 */
+.logo img {
+  max-width: 80px; /* 写真のサイズを大きく */
+  max-height: 80px; /* 同様に高さも調整 */
+  aspect-ratio: 1 / 1; /* 正方形 */
+  object-fit: cover; /* トリミングして正方形に収める */
+}
+
+/* ナビゲーション */
+nav {
+  flex-grow: 1;
+  text-align: right; /* ナビゲーションを右寄せ */
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px; /* 間隔を広げる */
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li {
+  display: inline-block;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #555;
+  font-size: 18px; /* 文字サイズを少し大きく */
+  padding: 10px 15px; /* パディングを増加してクリックしやすく */
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  transition: all 0.3s;
+}
+
+.nav-links a:hover {
+  background-color: #007bff;
+  color: #fff;
+  border-color: #007bff;
+}
+
+/* ログインボタンとログアウトボタンを同じ見た目に */
+button, .button-link, .logout-btn {
+  background-color: transparent; /* 背景を透明にしてヘッダーと一致させる */
+  color: #555; /* 初期状態の文字色は黒色 */
+  border: 1px solid #ddd; /* 初期状態の囲い線はグレー */
+  border-radius: 5px;
+  padding: 10px 15px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  transition: all 0.3s;
+  cursor: pointer;
+  display: inline-block; /* ボタンのように見せる */
+  vertical-align: middle; /* 他の要素と位置を合わせる */
+}
+
+/* ホバー時に青色に変わる */
+button:hover, .button-link:hover, .logout-btn:hover {
+  background-color: #007bff;
+  color: #fff;
+  border-color: #007bff;
+}
+
+/* フォーカス時のアウトラインを削除 */
+button:focus, .button-link:focus, .logout-btn:focus {
+  outline: none;
+}
+
+/* ログアウトボタンの特別なスタイル（デフォルトでヘッダー背景色と一致） */
+button[type="submit"] {
+  background: transparent; /* 背景を透明に */
+  border: none; /* 境界線を削除 */
+  padding: 0; /* パディングをリセット */
+  font-size: 16px;
+  color: #555; /* 初期状態は黒色 */
+  cursor: pointer; /* カーソルをポインタに */
+  text-decoration: none; /* リンクの下線を削除 */
+}
+
+/* ログアウトボタンのホバー時 */
+.button-link:hover, .logout-btn:hover {
+  background-color: #007bff;
+  color: #fff;
+  border-color: #007bff;
+}
+
+/* ログアウトボタンの位置を調整するため、li要素をブロック表示にする */
+.nav-links li.logout-item {
+  display: block;
+  margin-top: -10px; /* 上に少し寄せる */
+}
+
+.logout-btn {
+  background-color: transparent;
+  color: #555;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px 15px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  cursor: pointer;
+  display: inline-block;
+}
+
+/* 顧客名 */
+.customer-name {
+  flex-grow: 1; /* 中央に配置するために空きスペースを埋める */
+  text-align: center; /* 顧客名を中央寄せ */
+  font-size: 18px; /* フォントサイズ */
+  color: #555; /* 文字色 */
+}
+
+/* 顧客名の文字スタイル */
+.customer-name span {
+  font-weight: bold; /* 顧客名を太字 */
+}
+
 

@@ -1,6 +1,82 @@
 // Place all the styles related to the public/orders controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+/* 共通スタイル */
+.text-center {
+  text-align: center;
+}
+
+.margin-top-10 {
+  margin-top: 10px;
+}
+
+.margin-top-20 {
+  margin-top: 20px;
+}
+
+.margin-top-30 {
+  margin-top: 30px;
+}
+
+.margin-top-50 {
+  margin-top: 50px;
+}
+
+.font-size-16 {
+  font-size: 16px;
+}
+
+.font-size-18 {
+  font-size: 18px;
+}
+
+.font-size-24 {
+  font-size: 24px;
+}
+
+.font-size-1rem {
+  font-size: 1rem;
+}
+
+.font-weight-bold {
+  font-weight: bold;
+}
+
+.bg-light {
+  background-color: #f8f9fa;
+}
+
+.border-rounded {
+  border-radius: 0.375rem;
+}
+
+.border {
+  border: 1px solid #ced4da;
+}
+
+.border-focus {
+  border-color: #80bdff;
+  box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.25);
+}
+
+/* ボタンスタイル */
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+/* 注文完了ページ */
 .order-complete {
   text-align: center;
   margin-top: 50px;
@@ -17,20 +93,102 @@
   margin-top: 10px;
 }
 
-.return-link {
-  margin-top: 30px;
+/* 画像スタイル */
+.order-item-image {
+  max-width: 100px;
+  height: auto;
+  object-fit: cover;
 }
 
-.btn-return {
+/* テーブルスタイル */
+table {
+  width: 100%;
+  table-layout: fixed;
+  text-align: center;
+  vertical-align: middle;
+}
+
+thead {
+  background-color: #f8f9fa;
+}
+
+th {
+  width: 20%;
+  font-weight: bold;
+}
+
+td {
+  width: 20%;
+}
+
+.order-history-table td:last-child {
+  text-align: center;
+}
+
+/* 注文ページ */
+.order-page {
+  font-family: 'Arial', sans-serif;
+}
+
+.order-page__payment-method,
+.order-page__delivery-address {
+  margin-bottom: 20px;
+}
+
+.order-page__radio-button {
+  margin-right: 10px;
+}
+
+.order-page__select {
+  font-size: 1.1rem;
+  padding: 0.75rem;
+  border-radius: 0.375rem;
+  border: 1px solid #ced4da;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.order-page__select:focus,
+.order-page__input-field:focus {
+  border-color: #80bdff;
+  box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.25);
+}
+
+.order-page__new-address {
+  margin-top: 20px;
+}
+
+.order-page__new-address .form-group {
+  margin-bottom: 15px;
+}
+
+.order-page__new-address label {
   display: inline-block;
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
-  text-decoration: none;
-  border-radius: 5px;
-  font-size: 16px;
+  width: 200px;
+  font-weight: bold;
+  margin-right: 10px;
 }
 
-.btn-return:hover {
-  background-color: #0056b3;
+.order-page__new-address input {
+  display: inline-block;
+  width: calc(100% - 130px);
+  padding: 0.75rem;
+  border-radius: 0.375rem;
+  border: 1px solid #ced4da;
 }
+
+.order-page__new-address .order-page__short-input {
+  width: 50%;
+}
+
+/* 注文履歴一覧テーブル */
+.order-history-table {
+  width: 100%;
+  font-size: 1rem;
+}
+
+.order-history-table th,
+.order-history-table td {
+  text-align: center;
+  vertical-align: middle;
+}
+

@@ -1,26 +1,59 @@
-<h2>Log in</h2>
-<%= flash[:notice] %>
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+<div class="container">
+  <div class="row justify-content-center">
+    <!-- フォーム全体をcol-md-6で中央寄せ -->
+    <div class="col-md-6">
+      <!-- ログインタイトル -->
+      <div style="display: inline-block; background-color: #f0f0f0; padding: 10px; margin-bottom: 10px;">
+        <h4 style="margin: 0;">ログイン</h4>
+      </div></br>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
+      <!-- 会員ログイン案内 -->
+      <div style="display: inline-block; background-color: #f0f0f0; padding: 10px; margin: 10px 0;">
+        <h6 style="margin: 0;">会員の方はこちらからログイン</h6>
+      </div>
+      <div class="text-left text-danger" style="margin-left: 15px;">
+        <%= flash[:notice] %>
+      </div>
 
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+      <!-- フォーム -->
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <!-- メールアドレス -->
+        <div class="form-group">
+          <div class="row align-items-center">
+            <div class="col-md-4 text-right">
+              <%= f.label :メールアドレス %>
+            </div>
+            <div class="col-md-8">
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+            </div>
+          </div>
+        </div>
+
+        <!-- パスワード -->
+        <div class="form-group">
+          <div class="row align-items-center">
+            <div class="col-md-4 text-right">
+              <%= f.label :パスワード %>
+            </div>
+            <div class="col-md-8">
+              <%= f.password_field :password, autocomplete: "current-password", class: "form-control" %>
+            </div>
+          </div>
+        </div>
+
+        <!-- ログインボタン -->
+        <div class="text-center mt-3">
+          <%= f.submit "ログイン", class: "btn btn-primary btn-block", style: "width: calc(100% - 40px); margin-bottom: 20px;" %>
+        </div>
+      <% end %>
+
+      <!-- 新規登録案内 -->
+      <div style="display: inline-block; background-color: #f0f0f0; padding: 10px; margin-top: 10px;">
+        <h6 style="margin: 0;">会員登録がお済みでない方</h6>
+      </div>
+      <p class="text-left" style="margin-left: 15px;">
+        <%= link_to "こちら", new_customer_registration_path, class: "btn btn-link" %>から新規登録を行って下さい。
+      </p>
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
   </div>
-<% end %>
-
-<%= render "public/shared/links" %>
+</div>

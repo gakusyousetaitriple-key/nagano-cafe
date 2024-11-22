@@ -1,38 +1,82 @@
-<h1>注文詳細</h1>
+<div class="container mt-5 order-detail-page">
+  <h1 class="mb-4">注文履歴詳細</h1>
 
-<h3>注文情報</h3>
-<p>注文番号: <%= @order.id %></p>
-<p>注文日: <%= @order.created_at.strftime("%Y年%m月%d日") %></p>
-<p>注文状況: <%= @order.is_order %>
-<p>支払い方法: <%= @order.payment_method_i18n %></p>
+  <!-- 注文情報と請求情報 -->
+  <div class="d-flex" style="gap: 20px;">
 
-<h3>お届け先情報</h3>
-<p>宛名: <%= @order.name %></p>
-<p>住所: <%= @order.post_code %> <%= @order.address %></p>
+    <!-- 注文情報 -->
+    <div class="order-items" style="flex: 7;">
+    <h4>注文情報</h4>
+    <table class="table table-bordered">
+    <tbody>
+      <tr>
+        <th>注文日</th>
+        <td><%= @order.created_at.strftime("%Y年%m月%d日") %></td>
+      </tr>
+      <tr>
+        <th>住所</th>
+        <td><%= @order.post_code %> <%= @order.address %></td>
+      </tr>
+      <tr>
+        <th>宛名</th>
+        <td><%= @order.name %></td>
+      </tr>
+      <tr>
+        <th>支払い方法</th>
+        <td><%= I18n.t("enums.order.payment_method.#{@order.payment_method}") %></td>
+      </tr>
+      <tr>
+        <th>注文状況</th>
+        <td><%= I18n.t("enums.order.is_order.#{@order.is_order}") %></td>
+      </tr>
+    </tbody>
+  </table>
 
-<h3>注文商品</h3>
-<table>
-  <thead>
-    <tr>
-      <th>商品名</th>
-      <th>単価</th>
-      <th>数量</th>
-      <th>小計</th>
-    </tr>
-  </thead>
-<tbody>
-  <% @order.order_details.each do |order_detail| %>
-    <tr>
-      <td><%= order_detail.item.name %></td>
-      <td><%= number_to_currency(order_detail.price, unit: "¥") %></td>
-      <td><%= order_detail.quantity %></td>
-      <td><%= number_to_currency(order_detail.price * order_detail.quantity, unit: "¥") %></td>
-    </tr>
-  <% end %>
-</tbody>
-</table>
+  </div>
 
-<h3>合計金額</h3>
-<p>商品合計: <%= number_to_currency(@order.total_amount, unit: "¥") %></p>
-<p>送料: <%= number_to_currency(@order.postage, unit: "¥") %></p>
-<p>合計金額: <%= number_to_currency(@order.total_amount + @order.postage, unit: "¥") %></p>
+    
+    <!-- 請求情報 -->
+    <div class="order-summary" style="flex: 3;">
+      <h4>請求情報</h4>
+      <table class="table table-bordered">
+        <tbody>
+          <tr>
+            <th>商品合計</th>
+            <td><%= number_to_currency(@order.total_amount, unit: "¥") %></td>
+          </tr>
+          <tr>
+            <th>配送料</th>
+            <td><%= number_to_currency(@order.postage, unit: "¥") %></td>
+          </tr>
+          <tr>
+            <th>ご請求金額</th>
+            <td><%= number_to_currency(@order.total_amount + @order.postage, unit: "¥") %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 注文内容 -->
+  <h4>注文内容</h4>
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>商品</th>
+        <th>単価（税込）</th>
+        <th>個数</th>
+        <th>小計</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @order.order_details.each do |order_detail| %>
+        <tr>
+          <td><%= order_detail.item.name %></td>
+          <td><%= number_to_currency(order_detail.price, unit: "円") %></td>
+          <td><%= order_detail.quantity %></td>
+          <td><%= number_to_currency(order_detail.price * order_detail.quantity, unit: "円") %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

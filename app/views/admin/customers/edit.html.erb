@@ -1,3 +1,4 @@
+
 <h3 class="mb-4"><%= @customer.last_name + " " + @customer.first_name + "さんの会員情報編集" %></h3>
 
 <%= form_with model: @customer, url: admin_customer_path(@customer), method: :patch, class: "needs-validation" do |f| %>
@@ -68,3 +69,4 @@
     </div>
   </div>
 <% end %>
+

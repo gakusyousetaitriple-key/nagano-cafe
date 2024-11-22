@@ -1,43 +1,42 @@
 <header>
-<div class="header-container">
-  <!-- ロゴ -->
-  <a href="/" class="logo">
-   <h1>ロゴ予定</h1>
-  </a>
+  <div class="header-container">
+    <!-- ロゴ -->
+    <a href="/" class="logo">
+      <img src="<%= asset_path('logo.png') %>" alt="ロゴ" />
+    </a>
 
+    <!-- 顧客名を表示する場所 -->
+    <% if customer_signed_in? %>
+      <div class="customer-name">
+        <span><%= "ようこそ、" + current_customer.last_name + "さん！" %></span>
+      </div>
+    <% end %>
 
-
-
-
-  <!-- ナビゲーション -->
-  <nav>
-  <% if customer_signed_in? %>
-  <p>いらっしゃいませ、<%= current_customer.last_name %> 様</p>
-    <!-- ログイン後（顧客） -->
-    <ul>
-      <li><a href="<%= public_customer_path %>">マイページ</a></li>
-      <li><a href="<%= public_items_path %>">商品一覧</a></li>
-      <li><a href="<%= public_cart_items_path %>">カート</a></li>
-      <li><%= button_to 'ログアウト', destroy_customer_session_path, method: :delete %></li>
-    </ul>
-  <% elsif admin_signed_in? %>
-    <!-- ログイン後（管理者） -->
-    <ul>
-      <li><a href="<%= admin_items_path %>">商品一覧</a></li>
-      <li><a href="<%= admin_customers_path %>">会員一覧</a></li>
-      <li><a href="<%= admin_root_path %>">注文履歴</a></li>
-      <li><a href="<%= admin_genres_path %>">ジャンル一覧</a></li>
-      <li><%= button_to 'ログアウト', destroy_admin_session_path, method: :delete %></li>
-    </ul>
-  <% else %>
-    <!-- ログイン前 -->
-    <ul>
-      <li><a href="<%= about_path %>">About</a></li>
-      <li><a href="<%= public_items_path %>">商品一覧</a></li>
-      <li><a href="<%= new_customer_registration_path %>">新規登録</a></li>
-      <li><a href="<%= new_customer_session_path %>">ログイン</a></li>
-    </ul>
-  <% end %>
-</nav>
-</div>
+    <!-- ナビゲーション -->
+    <nav>
+      <% if customer_signed_in? %>
+        <ul class="nav-links">
+          <li><a href="<%= public_customer_path %>">マイページ</a></li>
+          <li><a href="<%= public_items_path %>">商品一覧</a></li>
+          <li><a href="<%= public_cart_items_path %>">カート</a></li>
+          <li class="logout-item"><%= button_to 'ログアウト', destroy_customer_session_path, method: :delete, class: 'logout-btn' %></li>
+        </ul>
+      <% elsif admin_signed_in? %>
+        <ul class="nav-links">
+          <li><a href="<%= admin_items_path %>">商品一覧</a></li>
+          <li><a href="<%= admin_customers_path %>">会員一覧</a></li>
+          <li><a href="<%= admin_root_path %>">注文履歴</a></li>
+          <li><a href="<%= admin_genres_path %>">ジャンル一覧</a></li>
+          <li class="logout-item"><%= button_to 'ログアウト', destroy_customer_session_path, method: :delete, class: 'logout-btn' %></li>
+        </ul>
+      <% else %>
+        <ul class="nav-links">
+          <li><a href="<%= about_path %>">About</a></li>
+          <li><a href="<%= public_items_path %>">商品一覧</a></li>
+          <li><a href="<%= new_customer_registration_path %>">新規登録</a></li>
+          <li><a href="<%= new_customer_session_path %>">ログイン</a></li>
+        </ul>
+      <% end %>
+    </nav>
+  </div>
 </header>

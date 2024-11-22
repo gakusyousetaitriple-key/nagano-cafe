@@ -6,6 +6,12 @@ class Public::CartItemsController < ApplicationController
   end
   # カートに商品を追加
   def create
+      # 2024年11月22日10時修正　非ログイン対応
+    if current_customer.nil?
+      # current_customerがnilの場合、ログイン画面にリダイレクト
+      redirect_to new_customer_session_path, notice: 'カートに商品を入れるにはログインが必要です'
+      return
+    end
     @cart_item = current_customer.cart_items.find_by(item_id: params[:cart_item][:item_id])
     
     if @cart_item
