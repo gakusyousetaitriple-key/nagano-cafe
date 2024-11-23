@@ -25,10 +25,12 @@
       <tr>
         <td><%= f.label :is_order, "注文ステータス", class: "font-weight-bold" %></td>
         <td><%= f.select :is_order, Order.is_orders.keys.map { |key| [I18n.t("enums.order.is_order.#{key}"), key] }, {}, class: "form-control" %></td>
-        <td colspan="2" class="text-left"><%= f.submit "更新する", class: "btn btn-primary" %></td>
       </tr>
     </tbody>
   </table>
+    <div class="text-end">
+      <%= f.submit "更新する", class: "btn btn-primary text-end" %>
+    </div>
   <% end %>
 
   <div class="d-flex justify-content-between align-items-start" style="gap: 20px;">
