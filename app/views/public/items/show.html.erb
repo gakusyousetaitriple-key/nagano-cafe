@@ -5,7 +5,7 @@
       <!-- 商品画像 -->
       <td class="product-image-container">
         <% if @item.image.attached? %>
-          <%= image_tag @item.image, alt: @item.name, class: "large-image" %>
+          <%= image_tag @item.image, alt: @item.name, class: "large-image", style: "width: 300px; height: 300px; object-fit: cover;" %>
         <% else %>
           <p>画像がありません</p>
         <% end %>
