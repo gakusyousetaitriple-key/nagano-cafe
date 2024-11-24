@@ -46,8 +46,8 @@
     </div>
 
     <div class="d-flex justify-content-between mt-3">
-      <%= link_to '買い物を続ける', public_items_path, class: 'btn btn-primary' %>
-      <p class="h5">カート全体の合計金額: 
+      <%= link_to '買い物を続ける', top_path, class: 'btn btn-primary' %>
+      <p class="h5">カート全体の合計金額:
         <span class="total-amount"><%= number_to_currency(@cart_items.sum { |item| item.item.price * item.amount }) %></span>
       </p>
     </div>
