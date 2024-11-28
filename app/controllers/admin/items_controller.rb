@@ -2,7 +2,7 @@ class Admin::ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update]
 
   def index
-    @items = Item.page(params[:page]).per(10) # 1ページに10件表示
+    @items = Item.page(params[:page]).per(10)
   end
 
   def show
@@ -10,7 +10,7 @@ class Admin::ItemsController < ApplicationController
 
   def new
     @item = Item.new(is_active: true)
-    @genres = Genre.all # ジャンル一覧を取得
+    @genres = Genre.all
   end
 
   def create
@@ -42,4 +42,6 @@ class Admin::ItemsController < ApplicationController
   def set_item
     @item = Item.find(params[:id])
   end
+
+  
 end
